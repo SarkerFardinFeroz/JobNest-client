@@ -1,14 +1,18 @@
-import { motion } from "framer-motion";
+
+import Banner from "../../components/Banner/Banner";
+import PageTransition from "../../components/PageTransition/PageTransition";
 const AllJobs = () => {
+  const text1 = 'FindJobs'
+  const text2 = 'Search your career opportunity through 12,800 jobs'
+
   return (
-    <motion.div
-      initial={{ x: "-50vw" }}
-      animate={{ x: 0 }}
-      transition={{ delay: 0.1, duration:0.4 }}
-      className="text-center"
+    <PageTransition
     >
+      <div className="mt-[-68px]">
+        <Banner text1={text1} text2={text2} />
+      </div>
       This is All Jobs page
-    </motion.div>
+    </PageTransition>
   );
 };
 

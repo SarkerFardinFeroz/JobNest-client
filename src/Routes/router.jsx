@@ -35,6 +35,10 @@ const router = createBrowserRouter([
         element: <MyJobs />,
       },
       {
+        path: "/blogs",
+        element: <Blog />,
+      },
+      {
         path: "/login",
         element: <Login />,
       },
@@ -45,9 +49,6 @@ const router = createBrowserRouter([
      
     ],
   },
-  {
-    path: "/blogs",
-    element: <Blog />,
-  },
+ 
 ]);
 export default router;

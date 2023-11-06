@@ -1,31 +1,34 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { useState } from "react";
 const Register = () => {
+  const [isShow, setShow] = useState(false);
   return (
     <div className="relative">
       <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-      <div className="bg-[url('https://images.unsplash.com/photo-1613327986042-63d4425a1a5d?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-no-repeat bg-cover h-[70vh] flex items-center text-[#f1f1f1]  ">
-        <div className="w-96 mx-auto">
+      <div className="bg-[url('https://i.imgur.com/MGPsJN7.jpg')] bg-no-repeat bg-cover h-[70vh] flex items-center text-[#f1f1f1]  ">
+        <div className=" w-72 md:w-96 mx-auto">
           <motion.div
-           initial={{  x: '-100vw' }}
-           animate={{  x: 0, }}
-           transition={{ delay: 0.1, duration:0.7,  }}
-           className=" bg-[#2c2c2c7c] border backdrop-blur-md border-gray-700 rounded-xl shadow-sm ">
+            initial={{ x: "-100vw" }}
+            animate={{ x: 0 }}
+            transition={{ delay: 0.1, duration: 0.7 }}
+            className=" bg-[#2c2c2c7c] border backdrop-blur-md border-gray-700 rounded-xl shadow-sm "
+          >
             <div className="p-4 sm:p-7">
               <div className="text-start">
-                <h1 className="block text-2xl font-bold  ">
-                Create an account
+                <h1 className="block text-xl md:text-2xl font-bold  ">
+                  Create an account
                 </h1>
                 <p className="mt-2 text-sm  ">
-                Enter your email below to create your account
+                  Enter your email below to create your account
                 </p>
               </div>
 
               <div className="mt-5">
                 <button
                   type="button"
-                  className="w-full py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-[#eeeeeee0] backdrop-blur-lg text-sm text-gray-700 shadow-sm align-middle hover:bg-gray-50  border-black  transition-all  "
+                  className="w-full py-2 md:py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-[#eeeeeee0] backdrop-blur-lg text-sm text-gray-700 shadow-sm align-middle hover:bg-gray-50  border-black  transition-all  "
                 >
                   <svg
                     className="w-5 h-auto"
@@ -61,21 +64,6 @@ const Register = () => {
                 <form>
                   <div className="grid gap-y-4">
                     <div>
-                      <label htmlFor="name" className="block text-sm mb-2 ">
-                        Name
-                      </label>
-                      <div className="relative">
-                        <input
-                          type="text"
-                          name="name"
-                          className="py-3 px-4 placeholder:text-[#dfdfdf] block w-full text-[#eeeded] bg-[#c6a6f393] backdrop-blur-md border-2 border-gray-100 rounded-md text-sm 00  "
-                          placeholder="Enter your Name"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div>
                       <label htmlFor="email" className="block text-sm mb-2 ">
                         Email
                       </label>
@@ -83,7 +71,7 @@ const Register = () => {
                         <input
                           type="email"
                           name="email"
-                          className="py-3 px-4 placeholder:text-[#dfdfdf] block w-full text-[#eeeded] bg-[#c6a6f393] backdrop-blur-md border-2 border-gray-100 rounded-md text-sm 00  "
+                          className="py-3 px-4 placeholder:text-[#dfdfdf] block w-full text-[#eeeded] bg-[#c6a6f393] backdrop-blur-md border-2 border-gray-100 rounded-md text-sm outline-[#dcc2fd] "
                           placeholder="Enter your email"
                           required
                         />
@@ -101,12 +89,18 @@ const Register = () => {
                       </div>
                       <div className="relative">
                         <input
-                          type="password"
+                          type={isShow ? "text" : "password"}
                           name="password"
-                          className="py-3 px-4  placeholder:text-[#dfdfdf] text-[#eeeded] block w-full bg-[#c6a6f393] backdrop-blur-md border-2 border-gray-200 rounded-md text-sm"
+                          className="py-3 px-4  placeholder:text-[#dfdfdf] text-[#eeeded] block w-full bg-[#c6a6f393] backdrop-blur-md border-2 border-gray-200 rounded-md text-sm outline-[#dcc2fd]"
                           placeholder="Enter your password"
                           required
                         />
+                        <span
+                          onClick={() => setShow(!isShow)}
+                          className="text-[#fcfcfc] absolute cursor-pointer top-1 right-0 z-30 px-3 py-2 rounded-r-lg text-2xl capitalize "
+                        >
+                          {isShow ? <AiFillEye /> : <AiFillEyeInvisible />}
+                        </span>
                       </div>
                       <p className="mt-2 text-sm  ">
                         Dont’t Have An Account ?{" "}
@@ -114,14 +108,14 @@ const Register = () => {
                           to={"/login"}
                           className="text-[#794aff] decoration-2 hover:underline font-medium"
                         >
-                          login
+                          Login
                         </Link>
                       </p>
                     </div>
 
                     <button
                       type="submit"
-                      className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-[#7030f6] text-white duration-300 hover:bg-[#6c41e0]        "
+                      className="py-1 md:py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-[#7030f6] text-white duration-300 hover:bg-[#6c41e0]        "
                     >
                       Register
                     </button>

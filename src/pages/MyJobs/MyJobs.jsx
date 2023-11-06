@@ -1,15 +1,16 @@
-import { motion } from "framer-motion";
+import Banner from "../../components/Banner/Banner";
+import PageTransition from "../../components/PageTransition/PageTransition";
 
 const MyJobs = () => {
+  const text1="My Jobs"
+  const text2=""
   return (
-    <motion.div
-      initial={{ x: "-50vw" }}
-      animate={{ x: 0 }}
-      transition={{ delay: 0.1, duration:0.4 }}
-      className="text-center"
-    >
+    <PageTransition>
+      <div className="mt-[-68px]">
+        <Banner text1={text1} text2={text2} />
+      </div>
       This is MyJobs page
-    </motion.div>
+    </PageTransition>
   );
 };
 

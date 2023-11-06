@@ -1,15 +1,16 @@
-import { motion } from "framer-motion";
+
+import HomeBanner from "../../components/HomeBanner/HomeBanner";
+import PageTransition from "../../components/PageTransition/PageTransition";
 
 const Home = () => {
   return (
-    <motion.div
-      initial={{ x: "-50vw" }}
-      animate={{ x: 0 }}
-      transition={{ delay: 0.1, duration:0.4 }}
-      className="text-center"
-    >
-      This is Home page
-    </motion.div>
+    <PageTransition>
+      <div className="mt-[-68px]">
+        <HomeBanner />
+      </div>
+
+      <main className="py-96">This is Home</main>
+    </PageTransition>
   );
 };
 
