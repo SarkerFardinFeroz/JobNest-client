@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import DarkMode from "../../components/DarkMode/DarkMode";
 import logo from "../../../public/images/logo.png";
 import "./Header.css";
@@ -7,39 +7,39 @@ const Header = () => {
     <>
       {" "}
       <li className="py-1 border-b lg:border-none focus:bg-transparent">
-        <a className="hover:bg-transparent dark:hover:text-white ">
+        <div className="hover:bg-transparent dark:hover:text-white ">
           <NavLink to={"/"}>Home</NavLink>
-        </a>
+        </div>
       </li>
       <li className="py-1 border-b lg:border-none focus:bg-transparent">
-        <a className="hover:bg-transparent dark:hover:text-white ">
+        <div className="hover:bg-transparent dark:hover:text-white ">
           <NavLink to={"/all-jobs"}>All Jobs</NavLink>
-        </a>
+        </div>
       </li>
       <li className="py-1 border-b lg:border-none focus:bg-transparent">
-        <a className="hover:bg-transparent  dark:hover:text-white ">
+        <div className="hover:bg-transparent  dark:hover:text-white ">
           <NavLink to={"/applied-jobs "}>Applied Jobs</NavLink>
-        </a>
+        </div>
       </li>
       <li className="py-1 border-b lg:border-none focus:bg-transparent">
-        <a className="hover:bg-transparent dark:hover:text-white ">
+        <div className="hover:bg-transparent dark:hover:text-white ">
           <NavLink to={"/add-job"}>Add A Job</NavLink>
-        </a>
+        </div>
       </li>
       <li className="py-1 border-b lg:border-none focus:bg-transparent">
-        <a className="hover:bg-transparent dark:hover:text-white ">
-          <NavLink to={"/my-job"}>My Jobs</NavLink>
-        </a>
+        <div className="hover:bg-transparent dark:hover:text-white ">
+          <NavLink to={"/my-jobs"}>My Jobs</NavLink>
+        </div>
       </li>
       <li className="py-1 border-b lg:border-none focus:bg-transparent">
-        <a className="hover:bg-transparent dark:hover:text-white ">
+        <div className="hover:bg-transparent dark:hover:text-white ">
           <NavLink to={"/blogs"}>Blogs</NavLink>
-        </a>
+        </div>
       </li>
       <li className="focus:bg-transparent lg:hidden ">
-        <a className="hover:bg-transparent dark:hover:text-white ">
+        <div className="hover:bg-transparent dark:hover:text-white ">
           <DarkMode />
-        </a>
+        </div>
       </li>
     </>
   );
@@ -82,9 +82,10 @@ const Header = () => {
                 <ul className="menu menu-horizontal  text-lg">{navLinks}</ul>
               </div>
               <div className="flex items-center gap-5">
-                <button className="bg-[#794aff]  text-white py-1 md:py-2 px-2 md:px-4 rounded-lg">
+               <Link to={'/login'}>
+               <button  className="bg-[#794aff]  text-white py-1 md:py-2 px-2 md:px-4 rounded-lg">
                   Login
-                </button>
+                </button></Link>
                 <div className=" hidden lg:flex ">
                   <DarkMode />
                 </div>

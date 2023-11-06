@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import logo from "../../../public/images/logo.png";
 const Footer = () => {
   return (
-    <div className="shadow-2xl border-t  border-[#8e8d8d3f] mt-14">
+    <div className="shadow-2xl border-t  border-[#8e8d8d3f] ">
       <footer className="footer  p-10 max-w-[1304px] px-4 mx-auto ">
         <aside>
           <h1 className="font-bold font-Caveat pb-2  text-2xl md:text-4xl">

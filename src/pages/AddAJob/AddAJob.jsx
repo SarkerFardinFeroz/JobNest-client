@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-const AllJobs = () => {
+
+const AddAJob = () => {
   return (
     <motion.div
       initial={{ x: "-50vw" }}
@@ -7,9 +8,9 @@ const AllJobs = () => {
       transition={{ delay: 0.1, duration:0.4 }}
       className="text-center"
     >
-      This is All Jobs page
+      This is Add A Job page
     </motion.div>
   );
 };
 
-export default AllJobs;
+export default AddAJob;
