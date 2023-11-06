@@ -7,8 +7,11 @@ export default {
     extend: {
       fontFamily: {
         Rubik: "'Rubik', sans-serif",
+        
       },
-      
+      colors: {
+        "btn-bg": "#24dc7a",
+      },
     },
   },
   plugins: [require("daisyui")],

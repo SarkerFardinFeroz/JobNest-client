@@ -9,26 +9,28 @@ const Login = () => {
   const navigate = useNavigate();
   const { signInUser, googleLogin } = useContext(AuthContext);
   const handleLogin = (e) => {
+    const toastId = toast.loading('Logging...')
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
     signInUser(email, password)
       .then((res) => {
-        toast.success("User logged in successfully!");
+        toast.success("User logged in successfully!",{id:toastId});
         navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
-        toast.error(error.message);
+        toast.error(error.message,{id:toastId});
       });
   };
   const handleSocialLogin = () => {
+    const toastId = toast.loading('Logging...')
     googleLogin()
       .then((res) => {
-        toast.success("User Logged in Successfully!");
+        toast.success("User logged in successfully!",{id:toastId});
         navigate(location?.state ? location.state : "/");
       })
-      .catch((error) => toast.error("Popup closed"));
+      .catch((error) => toast.error("Popup closed",{id:toastId}));
   };
   return (
     <div className="relative">

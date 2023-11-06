@@ -1,5 +1,5 @@
 import DarkMode from "../../components/DarkMode/DarkMode";
-import logo from "../../../public/images/logo.png";
+import logo from "../../assets/images/logo.png";
 import "./Header.css";
 import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import logo from "../../../public/images/logo.png";
+import logo from "../../assets/images/logo.png";
+
 const Footer = () => {
   return (
     <div className="shadow-2xl border-t  border-[#8e8d8d3f] ">
