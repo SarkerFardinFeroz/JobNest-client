@@ -1,13 +1,74 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import toast from "react-hot-toast";
+import { AuthContext } from "../../Provider/AuthProvider";
 const Register = () => {
   const [isShow, setShow] = useState(false);
+  const { createUser, googleLogin, handleUpdateProfile } =
+    useContext(AuthContext);
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const name = form.name.value;
+    const password = form.password.value;
+    const photo = form.photo.value;
+    if (password.length < 6) {
+      toast.error("Password should be at least 6 characters or longer.");
+      return;
+    } else if (!/[A-Z]/.test(password)) {
+      toast.error("Your password should have at least one capital letter.");
+      return;
+    }
+    if (!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\|]/.test(password)) {
+      toast.error("Your password should have at least one special character.");
+      return;
+    }
+    createUser(email, password)
+      .then((res) => {
+        handleUpdateProfile(name, photo)
+          .then(() => {
+            const uid = res.user?.uid;
+            const user = { name, email, photo, uid };
+            fetch("https://digital-nexa-server.vercel.app/user", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(user),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                console.log(data);
+                if (data.insertedId) {
+                  toast.success("User created Successfully!");
+                }
+              });
+            if (res.user) {
+              navigate("/");
+            }
+          })
+          .catch(() => {});
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
+  const handleSocialLogin = (media) => {
+    media()
+      .then((res) => {
+        toast.success("User Logged in Successfully!");
+        navigate("/");
+      })
+      .catch((error) => toast.error("Popup closed"));
+  };
   return (
     <div className="relative">
       <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-      <div className="bg-[url('https://i.imgur.com/MGPsJN7.jpg')] bg-no-repeat bg-cover h-[70vh] flex items-center text-[#f1f1f1]  ">
+      <div className="bg-[url('https://i.imgur.com/MGPsJN7.jpg')] bg-no-repeat bg-cover h-[720px] flex items-center text-[#f1f1f1]  ">
         <div className=" w-72 md:w-96 mx-auto">
           <motion.div
             initial={{ x: "-100vw" }}
@@ -27,8 +88,9 @@ const Register = () => {
 
               <div className="mt-5">
                 <button
+                  onClick={() => handleSocialLogin(googleLogin)}
                   type="button"
-                  className="w-full py-2 md:py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-[#eeeeeee0] backdrop-blur-lg text-sm text-gray-700 shadow-sm align-middle hover:bg-gray-50  border-black  transition-all  "
+                  className="w-full py-2 md:py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium dark:text-white  dark:bg-black bg-[#eeeeeee0] backdrop-blur-lg text-sm text-gray-700 shadow-sm align-middle hover:bg-gray-50  border-black  transition-all  "
                 >
                   <svg
                     className="w-5 h-auto"
@@ -61,8 +123,40 @@ const Register = () => {
                   Or
                 </div>
 
-                <form>
+                <form onSubmit={handleRegister}>
                   <div className="grid gap-y-4">
+                    <div>
+                      <label htmlFor="name" className="block text-sm mb-2 ">
+                        Name
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          name="name"
+                          className="py-3 px-4 placeholder:text-[#dfdfdf] block w-full text-[#eeeded] bg-[#c6a6f393] backdrop-blur-md border-2 border-gray-100 rounded-md text-sm outline-[#dcc2fd] "
+                          placeholder="Enter your name"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label htmlFor="photo" className="block text-sm mb-2 ">
+                        PhotoUrl
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          name="photo"
+                          className="py-3 px-4 placeholder:text-[#dfdfdf] block w-full text-[#eeeded] bg-[#c6a6f393] backdrop-blur-md border-2 border-gray-100 rounded-md text-sm outline-[#dcc2fd] "
+                          placeholder="Enter your photo url"
+                          required
+                        />
+                      </div>
+                    </div>
+
+
+
                     <div>
                       <label htmlFor="email" className="block text-sm mb-2 ">
                         Email
@@ -97,7 +191,7 @@ const Register = () => {
                         />
                         <span
                           onClick={() => setShow(!isShow)}
-                          className="text-[#fcfcfc] absolute cursor-pointer top-1 right-0 z-30 px-3 py-2 rounded-r-lg text-2xl capitalize "
+                          className="text-[#fcfcfc] absolute cursor-pointer  top-1 right-0 z-30 px-3 py-2 rounded-r-lg text-2xl capitalize "
                         >
                           {isShow ? <AiFillEye /> : <AiFillEyeInvisible />}
                         </span>

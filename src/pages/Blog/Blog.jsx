@@ -6,7 +6,7 @@ const Blog = () => {
   const text2 =""
   return (
     <PageTransition>
-      <div className="mt-[-68px]">
+      <div className="mt-[-70px]">
         <Banner text1={text1} text2={text2} />
       </div>
       This is MyJobs page

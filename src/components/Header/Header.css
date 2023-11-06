@@ -1,9 +1,10 @@
 .menu li > :not(ul):not(.menu-title):not(details):active,
 .menu li > :not(ul):not(.menu-title):not(details).active,
 .menu li > details > summary:active {
-  color: initial;
+  color: white;
   background-color: transparent; /* Set the background color to transparent */
 }
+
 
 nav ul li a.active {
   text-decoration: underline;
@@ -14,6 +15,6 @@ nav ul li a.active {
 }
 nav ul li a:hover {
   color: #794aff;
-
+  
   text-underline-offset: 6px;
 }

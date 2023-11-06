@@ -1,13 +1,39 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import toast from "react-hot-toast";
+import { AuthContext } from "../../Provider/AuthProvider";
 const Login = () => {
   const [isShow, setShow] = useState(false);
+  const navigate = useNavigate();
+  const { signInUser, googleLogin } = useContext(AuthContext);
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    signInUser(email, password)
+      .then((res) => {
+        toast.success("User logged in successfully!");
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+  const handleSocialLogin = () => {
+    googleLogin()
+      .then((res) => {
+        toast.success("User Logged in Successfully!");
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((error) => toast.error("Popup closed"));
+  };
   return (
     <div className="relative">
       <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-      <div className="bg-[url('https://i.imgur.com/MGPsJN7.jpg')] bg-no-repeat bg-cover h-[70vh] flex items-center text-[#f1f1f1]  ">
+      <div className="bg-[url('https://i.imgur.com/MGPsJN7.jpg')] bg-no-repeat bg-cover py-10 flex items-center text-[#f1f1f1]  ">
         <div className=" w-72 md:w-96 mx-auto">
           <motion.div
             initial={{ x: "-100vw" }}
@@ -27,6 +53,7 @@ const Login = () => {
 
               <div className="mt-5">
                 <button
+                  onClick={handleSocialLogin}
                   type="button"
                   className="w-full py-2 md:py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium dark:text-white  dark:bg-black bg-[#eeeeeee0] backdrop-blur-lg text-sm text-gray-700 shadow-sm align-middle hover:bg-gray-50  border-black  transition-all  "
                 >
@@ -61,7 +88,7 @@ const Login = () => {
                   Or
                 </div>
 
-                <form>
+                <form onSubmit={handleLogin}>
                   <div className="grid gap-y-4">
                     <div>
                       <label htmlFor="email" className="block text-sm mb-2 ">

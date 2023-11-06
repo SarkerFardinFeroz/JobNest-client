@@ -8,7 +8,7 @@ const AddAJob = () => {
   return (
     <PageTransition
     >
-      <div className="mt-[-68px]">
+      <div className="mt-[-70px]">
         <Banner text1={text1} text2={text2} />
       </div>
       This is Add A Job page
