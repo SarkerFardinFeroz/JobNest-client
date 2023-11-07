@@ -5,6 +5,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 import useJobsTabsData from "../../hooks/useJobsTabsData";
 import JobsTabsCard from "../JobsTabsCard/JobsTabsCard";
+import ReactSkeleton from "../ReactSkeleton/ReactSkeleton";
 const JobByCatTabs = () => {
   const { data, isLoading, isFetching } = useJobsTabsData();
   const [isAll, setIsAll] = useState(false);
@@ -56,9 +57,11 @@ const JobByCatTabs = () => {
     axiosSecure.get(url).then((res) => setCategory(res.data));
   }, [axiosSecure, url]);
 
-  if (isLoading == true) {
-    return <span className="loading loading-dots loading-lg"></span>;
+  if (isLoading == true || isFetching == true) {
+    return <div className="grid  md:grid-cols-3 gap-4 p-3"><ReactSkeleton cards={6}/></div>;
   }
+
+  
 
   return (
     <div>
@@ -71,9 +74,9 @@ const JobByCatTabs = () => {
         <TabPanel>
           <div className="grid  md:grid-cols-3 gap-4 p-3">
             {isAll
-              ? data.map((job, idx) => <JobsTabsCard key={idx} job={job} />)
+              ? data?.map((job, idx) => <JobsTabsCard key={idx} job={job} />)
               : data
-                  .slice(0, 6)
+                  ?.slice(0, 6)
                   .map((job, idx) => <JobsTabsCard key={idx} job={job} />)}
           </div>
           <div>
@@ -81,7 +84,7 @@ const JobByCatTabs = () => {
               <button
                 onClick={() => setIsAll(!isAll)}
                 className={`bg-[#794aff]  text-white py-1 md:py-2 px-2 md:px-4 rounded-lg ${
-                  data.length <= 6 ? "hidden" : ""
+                  data?.length <= 6 ? "hidden" : ""
                 }`}
               >
                 {isAll ? "Show Less" : "See All"}
@@ -92,8 +95,8 @@ const JobByCatTabs = () => {
         <TabPanel>
           <div className="grid  md:grid-cols-3 gap-4 p-3">
             {isAll
-              ? OnSite.map((job, idx) => <JobsTabsCard key={idx} job={job} />)
-              : OnSite.slice(0, 6).map((job, idx) => (
+              ? OnSite?.map((job, idx) => <JobsTabsCard key={idx} job={job} />)
+              : OnSite?.slice(0, 6).map((job, idx) => (
                   <JobsTabsCard key={idx} job={job} />
                 ))}
           </div>{" "}
@@ -113,8 +116,10 @@ const JobByCatTabs = () => {
         <TabPanel>
           <div className="grid  md:grid-cols-3 gap-4 p-3">
             {isAll
-              ? FullTime.map((job, idx) => <JobsTabsCard key={idx} job={job} />)
-              : FullTime.slice(0, 6).map((job, idx) => (
+              ? FullTime?.map((job, idx) => (
+                  <JobsTabsCard key={idx} job={job} />
+                ))
+              : FullTime?.slice(0, 6).map((job, idx) => (
                   <JobsTabsCard key={idx} job={job} />
                 ))}
           </div>
@@ -134,8 +139,8 @@ const JobByCatTabs = () => {
         <TabPanel>
           <div className="grid  md:grid-cols-3 gap-4 p-3">
             {isAll
-              ? Remote.map((job, idx) => <JobsTabsCard key={idx} job={job} />)
-              : Remote.slice(0, 6).map((job, idx) => (
+              ? Remote?.map((job, idx) => <JobsTabsCard key={idx} job={job} />)
+              : Remote?.slice(0, 6).map((job, idx) => (
                   <JobsTabsCard key={idx} job={job} />
                 ))}
           </div>
@@ -155,8 +160,8 @@ const JobByCatTabs = () => {
         <TabPanel>
           <div className="grid  md:grid-cols-3 gap-4 p-3">
             {isAll
-              ? Hybrid.map((job, idx) => <JobsTabsCard key={idx} job={job} />)
-              : Hybrid.slice(0, 6).map((job, idx) => (
+              ? Hybrid?.map((job, idx) => <JobsTabsCard key={idx} job={job} />)
+              : Hybrid?.slice(0, 6).map((job, idx) => (
                   <JobsTabsCard key={idx} job={job} />
                 ))}
           </div>
@@ -176,8 +181,10 @@ const JobByCatTabs = () => {
         <TabPanel>
           <div className="grid  md:grid-cols-3 gap-4 p-3">
             {isAll
-              ? PartTime.map((job, idx) => <JobsTabsCard key={idx} job={job} />)
-              : PartTime.slice(0, 6).map((job, idx) => (
+              ? PartTime?.map((job, idx) => (
+                  <JobsTabsCard key={idx} job={job} />
+                ))
+              : PartTime?.slice(0, 6).map((job, idx) => (
                   <JobsTabsCard key={idx} job={job} />
                 ))}
           </div>
