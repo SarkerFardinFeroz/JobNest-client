@@ -25,7 +25,7 @@ const JobByCatTabs = () => {
   }, [data]);
   useEffect(() => {
     if (data) {
-      const filteredData = data.filter((job) => job?.jobCategory === "On Site");
+      const filteredData = data.filter((job) => job.jobCategory === "On Site");
       setOnSite(filteredData);
     }
   }, [data]);
@@ -58,10 +58,12 @@ const JobByCatTabs = () => {
   }, [axiosSecure, url]);
 
   if (isLoading == true || isFetching == true) {
-    return <div className="grid  md:grid-cols-3 gap-4 p-3"><ReactSkeleton cards={6}/></div>;
+    return (
+      <div className="grid  md:grid-cols-3 gap-4 p-3">
+        <ReactSkeleton cards={6} />
+      </div>
+    );
   }
-
-  
 
   return (
     <div>
@@ -72,7 +74,7 @@ const JobByCatTabs = () => {
           ))}
         </TabList>
         <TabPanel>
-          <div className="grid  md:grid-cols-3 gap-4 p-3">
+          <div className="grid  md:grid-cols-2 lg:grid-cols-3 gap-4 p-3">
             {isAll
               ? data?.map((job, idx) => <JobsTabsCard key={idx} job={job} />)
               : data

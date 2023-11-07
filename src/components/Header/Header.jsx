@@ -26,7 +26,7 @@ const Header = () => {
 
   const navLinks = (
     <>
-      {" "}
+      
       <li className="py-1 border-b lg:border-none focus:bg-transparent">
         <div className="hover:bg-transparent p-0 dark:hover:text-white ">
           <NavLink to={"/"}>Home</NavLink>
@@ -131,11 +131,12 @@ const Header = () => {
                       className="mt-3 z-[1] p-2 bg-white dark:bg-zinc-900 text-black dark:text-white  shadow menu menu-sm dropdown-content rounded-box w-52  "
                     >
                       <li className="p-2 hover:bg-none ">
-                      <p className="justify-between hover:bg-none dark:hover:text-white" >Sign in as : </p>
+                        <p className="justify-between hover:bg-none dark:hover:text-white">
+                          Sign in as :{" "}
+                        </p>
                       </li>
                       <li className="p-2  ">
                         <a className="justify-between dark:hover:bg-[#ffffff2c]  dark:hover:text-white ">
-                          
                           {user?.displayName}
                         </a>
                       </li>
@@ -167,13 +168,13 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <div className="drawer-side z-50  ">
+          <div className="drawer-side  z-50  ">
             <label
               htmlFor="my-drawer-3"
               aria-label="close sidebar"
               className="drawer-overlay "
             ></label>
-            <ul className="menu p-4 md:w-80 min-h-full  gap-4  bg-[#00000093]  text-white  backdrop-blur-sm  ">
+            <ul className="menu p-4 md:w-80 min-h-full   gap-4  bg-[#00000093]  text-white  backdrop-blur-sm  ">
               {navLinks}
             </ul>
           </div>

@@ -2,7 +2,7 @@
 import Banner from "../../components/Banner/Banner";
 import PageTransition from "../../components/PageTransition/PageTransition";
 const AllJobs = () => {
-  const text1 = 'FindJobs'
+  const text1 = 'Find Jobs'
   const text2 = 'Search your career opportunity through 12,800 jobs'
 
   return (

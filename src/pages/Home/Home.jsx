@@ -10,8 +10,8 @@ const Home = () => {
         <HomeBanner />
       </div>
       
-      <main className=" max-w-[1304px] py-12 px-4 mx-auto">
-        <div>
+      <main className="  py-12 ">
+        <div className="max-w-[1304px] px-4 mx-auto ">
           <p className="dark:text-[#c2c2c2] text-lg font-medium underline underline-offset-8 decoration-2">
           Pursue Your Ideal Career
           </p>
@@ -22,6 +22,11 @@ const Home = () => {
         <JobByCatTabs/>
         </div>
         </div>
+
+      <div className="bg-[#44169c] my-6 h-[70vh]">
+
+      </div>
+
       </main>
     </PageTransition>
   );

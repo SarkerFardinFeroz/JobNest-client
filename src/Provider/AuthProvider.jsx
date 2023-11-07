@@ -17,7 +17,7 @@ import auth from "../firebase/firebase.config";
   const googleProvider = new GoogleAuthProvider();
   
   const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true);
   
     const createUser = (email, password) => {
@@ -55,7 +55,7 @@ import auth from "../firebase/firebase.config";
         unsubscribe();
       };
     }, []);
-  
+  console.log(user);
     const authInfo = {
       user,
       googleLogin,
