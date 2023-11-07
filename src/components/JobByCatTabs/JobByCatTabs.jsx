@@ -1,16 +1,64 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import { CiLocationOn } from "react-icons/ci";
-import { FaArrowRightLong } from "react-icons/fa6";
+
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
+import useJobsTabsData from "../../hooks/useJobsTabsData";
+import JobsTabsCard from "../JobsTabsCard/JobsTabsCard";
 const JobByCatTabs = () => {
+  const { data, isLoading, isFetching } = useJobsTabsData();
+  const [isAll, setIsAll] = useState(false);
   const [category, setCategory] = useState([]);
+  const [OnSite, setOnSite] = useState([]);
+  const [Remote, setRemote] = useState([]);
+  const [FullTime, setFullTime] = useState([]);
+  const [Hybrid, setHybrid] = useState([]);
+  const [PartTime, setPartTime] = useState([]);
   const axiosSecure = useAxiosSecure();
+
+  useEffect(() => {
+    if (data) {
+      const filteredData = data.filter((job) => job?.jobCategory === "Hybrid");
+      setHybrid(filteredData);
+    }
+  }, [data]);
+  useEffect(() => {
+    if (data) {
+      const filteredData = data.filter((job) => job?.jobCategory === "On Site");
+      setOnSite(filteredData);
+    }
+  }, [data]);
+  useEffect(() => {
+    if (data) {
+      const filteredData = data.filter(
+        (job) => job?.jobCategory === "Full Time"
+      );
+      setFullTime(filteredData);
+    }
+  }, [data]);
+  useEffect(() => {
+    if (data) {
+      const filteredData = data.filter((job) => job?.jobCategory === "Remote");
+      setRemote(filteredData);
+    }
+  }, [data]);
+  useEffect(() => {
+    if (data) {
+      const filteredData = data.filter(
+        (job) => job?.jobCategory === "Part Time"
+      );
+      setPartTime(filteredData);
+    }
+  }, [data]);
+
   const url = "/category";
   useEffect(() => {
     axiosSecure.get(url).then((res) => setCategory(res.data));
   }, [axiosSecure, url]);
+
+  if (isLoading == true) {
+    return <span className="loading loading-dots loading-lg"></span>;
+  }
 
   return (
     <div>
@@ -20,41 +68,131 @@ const JobByCatTabs = () => {
             <Tab key={idx}>{`${category.category}`}</Tab>
           ))}
         </TabList>
-
         <TabPanel>
-          <div className="p-10 rounded-lg duration-300 hover:bg-[#7a4aff] bg-[#eeeaff] dark:bg-[#322942] ">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm">Engineering</p>
-                <h3 className="text-xl font-semibold">
-                  Senior Full Stack Backend Engineer
-                </h3>
-                <div className="flex items-center mt-2 gap-3">
-                  <button className="py-[2px] px-4 bg-[#f2e7fe] text-[#561284] rounded-xl">
-                    Full-time
-                  </button>
-                  <button className="py-[2px] px-4 bg-[#eafee7] text-[#258412] rounded-xl">
-                    Active
-                  </button>
-                  <button className="py-[2px] px-4 bg-[#fefee7] text-[#847c12] rounded-xl flex items-center gap-1">
-                    <CiLocationOn /> USA, New York
-                  </button>
-                </div>
-              </div>
-              <button className="py-2 px-4 rounded-lg bg-[#784aff] text-white dark:bg-[#561284] flex items-center gap-1">
-                Apply Now <FaArrowRightLong />
+          <div className="grid  md:grid-cols-3 gap-4 p-3">
+            {isAll
+              ? data.map((job, idx) => <JobsTabsCard key={idx} job={job} />)
+              : data
+                  .slice(0, 6)
+                  .map((job, idx) => <JobsTabsCard key={idx} job={job} />)}
+          </div>
+          <div>
+            <div className="flex justify-center items-center">
+              <button
+                onClick={() => setIsAll(!isAll)}
+                className={`bg-[#794aff]  text-white py-1 md:py-2 px-2 md:px-4 rounded-lg ${
+                  data.length <= 6 ? "hidden" : ""
+                }`}
+              >
+                {isAll ? "Show Less" : "See All"}
               </button>
             </div>
           </div>
         </TabPanel>
         <TabPanel>
-          <h2>Any content 2</h2>
+          <div className="grid  md:grid-cols-3 gap-4 p-3">
+            {isAll
+              ? OnSite.map((job, idx) => <JobsTabsCard key={idx} job={job} />)
+              : OnSite.slice(0, 6).map((job, idx) => (
+                  <JobsTabsCard key={idx} job={job} />
+                ))}
+          </div>{" "}
+          <div>
+            <div className="flex justify-center items-center">
+              <button
+                onClick={() => setIsAll(!isAll)}
+                className={`bg-[#794aff]  text-white py-1 md:py-2 px-2 md:px-4 rounded-lg ${
+                  OnSite.length <= 6 ? "hidden" : ""
+                }`}
+              >
+                {isAll ? "Show Less" : "See All"}
+              </button>
+            </div>
+          </div>
         </TabPanel>
         <TabPanel>
-          <h2>Any content 3</h2>
+          <div className="grid  md:grid-cols-3 gap-4 p-3">
+            {isAll
+              ? FullTime.map((job, idx) => <JobsTabsCard key={idx} job={job} />)
+              : FullTime.slice(0, 6).map((job, idx) => (
+                  <JobsTabsCard key={idx} job={job} />
+                ))}
+          </div>
+          <div>
+            <div className="flex justify-center items-center">
+              <button
+                onClick={() => setIsAll(!isAll)}
+                className={`bg-[#794aff]  text-white py-1 md:py-2 px-2 md:px-4 rounded-lg ${
+                  FullTime.length <= 6 ? "hidden" : ""
+                }`}
+              >
+                {isAll ? "Show Less" : "See All"}
+              </button>
+            </div>
+          </div>
         </TabPanel>
         <TabPanel>
-          <h2>Any content 5</h2>
+          <div className="grid  md:grid-cols-3 gap-4 p-3">
+            {isAll
+              ? Remote.map((job, idx) => <JobsTabsCard key={idx} job={job} />)
+              : Remote.slice(0, 6).map((job, idx) => (
+                  <JobsTabsCard key={idx} job={job} />
+                ))}
+          </div>
+          <div>
+            <div className="flex justify-center items-center">
+              <button
+                onClick={() => setIsAll(!isAll)}
+                className={`bg-[#794aff]  text-white py-1 md:py-2 px-2 md:px-4 rounded-lg ${
+                  Remote.length <= 6 ? "hidden" : ""
+                }`}
+              >
+                {isAll ? "Show Less" : "See All"}
+              </button>
+            </div>
+          </div>
+        </TabPanel>
+        <TabPanel>
+          <div className="grid  md:grid-cols-3 gap-4 p-3">
+            {isAll
+              ? Hybrid.map((job, idx) => <JobsTabsCard key={idx} job={job} />)
+              : Hybrid.slice(0, 6).map((job, idx) => (
+                  <JobsTabsCard key={idx} job={job} />
+                ))}
+          </div>
+          <div>
+            <div className="flex justify-center items-center">
+              <button
+                onClick={() => setIsAll(!isAll)}
+                className={`bg-[#794aff]  text-white py-1 md:py-2 px-2 md:px-4 rounded-lg ${
+                  Hybrid.length <= 6 ? "hidden" : ""
+                }`}
+              >
+                {isAll ? "Show Less" : "See All"}
+              </button>
+            </div>
+          </div>
+        </TabPanel>
+        <TabPanel>
+          <div className="grid  md:grid-cols-3 gap-4 p-3">
+            {isAll
+              ? PartTime.map((job, idx) => <JobsTabsCard key={idx} job={job} />)
+              : PartTime.slice(0, 6).map((job, idx) => (
+                  <JobsTabsCard key={idx} job={job} />
+                ))}
+          </div>
+          <div>
+            <div className="flex justify-center items-center">
+              <button
+                onClick={() => setIsAll(!isAll)}
+                className={`bg-[#794aff]  text-white py-1 md:py-2 px-2 md:px-4 rounded-lg ${
+                  PartTime.length <= 6 ? "hidden" : ""
+                }`}
+              >
+                {isAll ? "Show Less" : "See All"}
+              </button>
+            </div>
+          </div>
         </TabPanel>
       </Tabs>
     </div>

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import error404 from "../../assets/lottie/404.json"
+
 import Lottie from "lottie-react";
 const ErrorPage = () => {
     return (
@@ -8,6 +9,7 @@ const ErrorPage = () => {
         <div className="w-full  text-center">
         <div className="w-1/2 mx-auto">
             <Lottie animationData={error404}/>
+           
           </div>
         </div>
         <div className="w-full text-center">

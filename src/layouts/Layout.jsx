@@ -2,8 +2,8 @@ import { Outlet, useNavigation } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import { Toaster } from "react-hot-toast";
-import { InfinitySpin } from "react-loader-spinner";
-
+import Lottie from "lottie-react";
+import spinner from "../assets/lottie/loading.json";
 const Layout = () => {
   const navigation = useNavigation();
 
@@ -12,7 +12,9 @@ const Layout = () => {
       <Header />
       {navigation.state === "loading" ? (
         <div className=" max-w-[1304px] flex items-center justify-center h-[70vh] px-4  mx-auto ">
-          <InfinitySpin width="200" color="#24dc7a" />
+         <div className=" w-72 md:w-96">
+          <Lottie animationData={spinner} />
+        </div>
         </div>
       ) : (
         <Outlet />
