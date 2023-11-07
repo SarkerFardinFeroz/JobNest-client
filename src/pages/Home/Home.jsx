@@ -1,5 +1,6 @@
 import HomeBanner from "../../components/HomeBanner/HomeBanner";
 import JobByCatTabs from "../../components/JobByCatTabs/JobByCatTabs";
+import NewsLetter from "../../components/NewsLetter/NewsLetter";
 import PageTransition from "../../components/PageTransition/PageTransition";
 import Testimonial from "../../components/Testimonial/Testimonial";
 
@@ -33,6 +34,9 @@ const Home = () => {
           <div className="text-start max-w-[1304px] py-4 mx-auto gap-6">
             <Testimonial />
           </div>
+        </div>
+        <div className="max-w-[1304px] pt-16 px-4 mx-auto "> 
+          <NewsLetter/>
         </div>
       </main>
     </PageTransition>
