@@ -55,7 +55,7 @@ import auth from "../firebase/firebase.config";
         unsubscribe();
       };
     }, []);
-  console.log(user);
+  // console.log(user);
     const authInfo = {
       user,
       googleLogin,
