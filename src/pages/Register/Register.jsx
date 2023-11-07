@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useContext, useState } from "react";
@@ -8,6 +8,7 @@ const Register = () => {
   const [isShow, setShow] = useState(false);
   const { createUser, googleLogin, handleUpdateProfile } =
     useContext(AuthContext);
+  const navigate = useNavigate();
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -28,26 +29,12 @@ const Register = () => {
     }
     createUser(email, password)
       .then((res) => {
+        const user = res.user;
         handleUpdateProfile(name, photo)
           .then(() => {
-            const uid = res.user?.uid;
-            const user = { name, email, photo, uid };
-            fetch("https://digital-nexa-server.vercel.app/user", {
-              method: "POST",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify(user),
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                console.log(data);
-                if (data.insertedId) {
-                  toast.success("User created Successfully!");
-                }
-              });
-            if (res.user) {
-              navigate("/");
+            if (user) {
+              toast.success("User created in successfully!");
+              navigate(location?.state ? location.state : "/");
             }
           })
           .catch(() => {});
@@ -68,8 +55,8 @@ const Register = () => {
   return (
     <div className="relative">
       <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-      <div className="bg-[url('https://i.imgur.com/MGPsJN7.jpg')] bg-no-repeat bg-cover h-[720px] flex items-center text-[#f1f1f1]  ">
-        <div className=" w-72 md:w-96 mx-auto">
+      <div className="bg-[url('https://i.ibb.co/1ZMz2Kh/bg-image.jpg')] bg-no-repeat mt-[-68px] bg-cover h-[800px] flex items-center text-[#f1f1f1]  ">
+        <div className=" w-72 md:w-96 mx-auto pt-16">
           <motion.div
             initial={{ x: "-100vw" }}
             animate={{ x: 0 }}
@@ -154,8 +141,6 @@ const Register = () => {
                         />
                       </div>
                     </div>
-
-
 
                     <div>
                       <label htmlFor="email" className="block text-sm mb-2 ">

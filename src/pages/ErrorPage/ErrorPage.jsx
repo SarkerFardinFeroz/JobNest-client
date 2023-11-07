@@ -4,7 +4,7 @@ import error404 from "../../assets/lottie/404.json"
 import Lottie from "lottie-react";
 const ErrorPage = () => {
     return (
-        <div>
+        <div className="dark:text-white">
             <div className=" items-center max-w-[1304px] px-4  mx-auto flex-col justify-center lg:flex-row py-28 md:px-24 md:py-20 lg:py-32 gap-16 lg:gap-28">
         <div className="w-full  text-center">
         <div className="w-1/2 mx-auto">
@@ -26,7 +26,7 @@ const ErrorPage = () => {
           </p>
           <div>
             <Link to={'/'}>
-              <button className="w-full  lg:w-auto my-4 rounded-md px-1 sm:px-16 font-semibold btn btn-outline ">
+              <button className="w-full dark:text-white lg:w-auto my-4 rounded-md px-1 sm:px-16 font-semibold btn btn-outline ">
                 Go back to Home page
               </button>
             </Link>

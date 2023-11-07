@@ -35,8 +35,8 @@ const Login = () => {
   return (
     <div className="relative">
       <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-      <div className="bg-[url('https://i.imgur.com/MGPsJN7.jpg')] bg-no-repeat bg-cover py-10 flex items-center text-[#f1f1f1]  ">
-        <div className=" w-72 md:w-96 mx-auto">
+      <div className="bg-[url('https://i.ibb.co/1ZMz2Kh/bg-image.jpg')] bg-no-repeat bg-cover h-[800px] py-10  mt-[-68px] flex items-center text-[#f1f1f1]  ">
+        <div className=" w-72 md:w-96 mx-auto pt-16">
           <motion.div
             initial={{ x: "-100vw" }}
             animate={{ x: 0 }}
