@@ -10,12 +10,13 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import PrivetRoute from "./PrivetRoute";
+import JobDetails from "../pages/JobDetailsPage/JobDetails";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    errorElement:<ErrorPage/>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -30,8 +31,21 @@ const router = createBrowserRouter([
         element: <AppliedJobs />,
       },
       {
+        path: "/job-details/:id",
+        element: (
+          <PrivetRoute>
+            <JobDetails />
+          </PrivetRoute>
+        ),
+        loader: ({ params }) =>fetch(`http://localhost:5000/job-details/${params.id}`),
+      },
+      {
         path: "/add-job",
-        element: <PrivetRoute><AddAJob /></PrivetRoute>
+        element: (
+          <PrivetRoute>
+            <AddAJob />
+          </PrivetRoute>
+        ),
       },
       {
         path: "/my-jobs",
@@ -49,9 +63,7 @@ const router = createBrowserRouter([
         path: "/register",
         element: <Register />,
       },
-     
     ],
   },
- 
 ]);
 export default router;

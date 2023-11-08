@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 const AllJobsTabuler = ({ job }) => {
   const {
+    _id,
     jobTitle,
     authorName,
     jobCategory,
@@ -38,9 +40,11 @@ const AllJobsTabuler = ({ job }) => {
         </div>
       </td>
       <th className="flex items-center justify-center  ">
-        <button className="text-center  py-[10px] px-6  lg:py-[2px] lg:px-4 text-sm bg-[#4d1970]  shadow-[#561284] dark:shadow-[#eadef7] shadow-sm text-[#eadef7] rounded-xl font-normal active:scale-95 duration-300">
+        <Link to={`/job-details/${_id}`} >
+        <button className="text-center  py-[10px] px-6  lg:py-[2px] lg:px-4 text-sm bg-[#4d1970]  shadow-[#561284] dark:shadow-[#eadef7] shadow-sm text-[#eadef7] rounded-xl font-normal  duration-300 active:scale-95">
           Details
         </button>
+        </Link>
       </th>
     </tr>
   );

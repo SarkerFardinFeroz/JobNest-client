@@ -1,10 +1,11 @@
 import { CiLocationOn } from "react-icons/ci";
 import { FaArrowRightLong } from "react-icons/fa6";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 const JobsTabsCard = ({ job }) => {
   const {
-    // _id,
-    pictureUrl,
+    _id,
+    logoURL,
     jobTitle,
     authorName,
     jobCategory,
@@ -16,14 +17,16 @@ const JobsTabsCard = ({ job }) => {
     jobPostingDate
   } = job || {};
   return (
-    <div className=" lg:h-[320px] p-3 md:p-6 rounded-lg duration-300 hover:bg-[#7a4aff] bg-[#eeeaff] hover:text-white dark:bg-[#322942] dark:hover:bg-[#7a4aff] ">
+    <div className=" lg:h-[340px] p-3 md:p-6 rounded-lg duration-300 hover:bg-[#7a4aff] bg-[#eeeaff] hover:text-white dark:bg-[#322942] dark:hover:bg-[#7a4aff] ">
       <div className="flex flex-col">
         <div className="flex-1 flex flex-col  ">
           <div className="md:flex gap-4 items-center  ">
+            <div className="bg-white rounded-xl p-1">
             <img
               className="w-[60px] h-[60px] rounded-xl object-cover"
-              src={pictureUrl}
+              src={logoURL}
             />
+            </div>
             <div>
               <p className="text-sm">{authorName}</p>
               <h3 className="text-xl font-semibold">{jobTitle}</h3>
@@ -57,9 +60,11 @@ const JobsTabsCard = ({ job }) => {
           <p className="text-sm font-medium mt-1">
             Salary : {`${minimumSalary}-${maximumSalary}`}$
           </p>
+          <Link to={`/job-details/${_id}`} >
           <button className="py-2  mt-4 px-4 rounded-lg  text-white bg-[#561284] w-max flex items-center gap-1">
             Apply Now <FaArrowRightLong />
           </button>
+          </Link>
         </div>
       </div>
     </div>

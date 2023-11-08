@@ -2,13 +2,14 @@ import DarkMode from "../../components/DarkMode/DarkMode";
 import logo from "../../assets/images/logo.png";
 import "./Header.css";
 import { useContext, useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { user, logOut } = useContext(AuthContext);
-
+ const location = useLocation()
+//  console.log(location.pathname);
   const handleSignOut = () => {
     logOut().then().catch();
   };
@@ -70,7 +71,7 @@ const Header = () => {
       className={`  duration-500 z-50 sticky top-0  ${
         isScrolled
           ? " bg-white dark:bg-[#00000086]  shadow-md backdrop-blur-xl text-back "
-          : " text-white  "
+          : `${location.pathname.includes('/job-details')? "text-black dark:text-white  border-b border-[#11111123] dark:border-[#292929] ":"text-white "}}`   
       } `}
     >
       <nav className="navbar max-w-[1304px] py-0  px-4 mx-auto">

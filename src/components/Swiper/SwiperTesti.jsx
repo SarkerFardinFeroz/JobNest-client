@@ -29,14 +29,16 @@ const SwiperTesti = () => {
               <input
                 type="radio"
                 name="rating-5"
-                checked
                 className="mask mask-star-2 bg-orange-400"
               />
             </div>
           </div>
           <div className="avatar md:absolute md:right-[12px] md:top-[-50px]  ">
             <div className="w-12 md:w-14 mask mask-squircle">
-              <img className="object-cover" src="https://images.unsplash.com/photo-1628157588553-5eeea00af15c?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+              <img
+                className="object-cover"
+                src="https://images.unsplash.com/photo-1628157588553-5eeea00af15c?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              />
             </div>
           </div>
         </div>
@@ -78,14 +80,16 @@ const SwiperTesti = () => {
               <input
                 type="radio"
                 name="rating-5"
-                checked
                 className="mask mask-star-2 bg-orange-400"
               />
             </div>
           </div>
           <div className="avatar md:absolute md:right-[12px] md:top-[-50px]  ">
             <div className="w-12 md:w-14 mask mask-squircle">
-              <img className="object-cover" src="https://images.unsplash.com/photo-1569913486515-b74bf7751574?q=80&w=1978&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+              <img
+                className="object-cover"
+                src="https://images.unsplash.com/photo-1569913486515-b74bf7751574?q=80&w=1978&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              />
             </div>
           </div>
         </div>
@@ -127,14 +131,16 @@ const SwiperTesti = () => {
               <input
                 type="radio"
                 name="rating-5"
-                checked
                 className="mask mask-star-2 bg-orange-400"
               />
             </div>
           </div>
           <div className="avatar md:absolute md:right-[12px] md:top-[-50px]  ">
             <div className="w-12 md:w-14 mask mask-squircle">
-              <img className="object-cover" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+              <img
+                className="object-cover"
+                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              />
             </div>
           </div>
         </div>

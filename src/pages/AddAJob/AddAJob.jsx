@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 import useJobsData from "../../hooks/useJobsData";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { reload } from "firebase/auth";
 
 const AddAJob = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -29,6 +30,7 @@ const AddAJob = () => {
     e.preventDefault();
     const form = e.target;
     const pictureUrl = form.pictureUrl.value;
+    const logoURL = form.logoURL.value;
     const jobTitle = form.jobTitle.value;
     const jobLocation = form.jobLocation.value;
     const authorName = form.authorName.value;
@@ -50,6 +52,9 @@ const AddAJob = () => {
 
     console.log(jobPostingDate, jobApplicationDeadline);
 
+    if (logoURL === "") {
+      return toast.error("Please provide company logo");
+    }
     if (pictureUrl === "") {
       return toast.error("Please provide picture url");
     }
@@ -91,6 +96,7 @@ const AddAJob = () => {
     }
     const job = {
       pictureUrl,
+      logoURL,
       jobTitle,
       jobLocation,
       authorName,
@@ -112,6 +118,7 @@ const AddAJob = () => {
           icon: "success",
           confirmButtonText: "ok",
         });
+       
       }
     });
   };
@@ -125,8 +132,19 @@ const AddAJob = () => {
         <div className="w-full duration-300 bg-[#6c24b8] text-[#f1f1f1] dark:text-white dark:bg-[#2d1073] rounded-xl">
           <div className=" shadow-xl  p-3 rounded-xl md:p-16">
             <form onSubmit={handlePostJob}>
+            <div className="w-full py-2">
+                    <p className="text-lg font-medium mb-2">Company Logo</p>
+                    <input
+                      type="text"
+                      name="logoURL"
+                      placeholder="Paste a company logo"
+                      className="py-2 w-full border rounded-lg px-4 bg-transparent placeholder:text-[#e6e6e6]"
+                    />
+                  </div>
               <div className="md:flex gap-8 justify-between">
+                
                 <div className="w-full">
+                  
                   <div className="w-full">
                     <p className="text-lg font-medium mb-2">Picture Url</p>
                     <input
