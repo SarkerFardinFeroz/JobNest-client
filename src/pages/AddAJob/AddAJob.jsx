@@ -1,5 +1,6 @@
 import Banner from "../../components/Banner/Banner";
 import PageTransition from "../../components/PageTransition/PageTransition";
+import { format } from "date-fns";
 import fillForm from "../../assets/lottie/filForm.json";
 import Lottie from "lottie-react";
 import { useContext, useState } from "react";
@@ -7,7 +8,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
-import useJobsTabsData from "../../hooks/useJobsTabsData";
+import useJobsData from "../../hooks/useJobsData";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Provider/AuthProvider";
 
@@ -17,13 +18,13 @@ const AddAJob = () => {
   const { user } = useContext(AuthContext);
   const [cat, setCat] = useState("");
   const axiosSecure = useAxiosSecure();
-  const { refetch } = useJobsTabsData();
+  const { refetch } = useJobsData();
   const text1 = "Post A Job";
   const text2 = "";
   const handleCatChange = (e) => {
     setCat(e.target.value);
   };
-  console.log(user?.displayName);
+  // console.log(user?.displayName);
   const handlePostJob = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -35,16 +36,19 @@ const AddAJob = () => {
     const minimumSalaryString = form.minimumSalary.value;
     const maximumSalaryString = form.maximumSalary.value;
     const jobDescription = form.jobDescription.value;
+    const postingDate = startDate;
+    const applicationDeadline = deadline;
     const jobApplicantsNumberString = form.jobApplicantsNumber.value;
-    const jobPostingDate = startDate;
-    const jobApplicationDeadline = deadline;
-    const minimumSalary= parseInt(minimumSalaryString)
-    const maximumSalary=parseInt(maximumSalaryString)
-    const jobApplicantsNumber=parseInt(jobApplicantsNumberString)
-    console.log(maximumSalary,minimumSalary,jobApplicantsNumber);
+    const minimumSalary = parseInt(minimumSalaryString);
+    const maximumSalary = parseInt(maximumSalaryString);
+    const jobApplicantsNumber = parseInt(jobApplicantsNumberString);
+    const jobPostingDate = format(new Date(postingDate), "yyyy-MM-dd");
+    const jobApplicationDeadline = format(
+      new Date(applicationDeadline),
+      "yyyy-MM-dd"
+    );
 
-
-
+    console.log(jobPostingDate, jobApplicationDeadline);
 
     if (pictureUrl === "") {
       return toast.error("Please provide picture url");
@@ -61,11 +65,17 @@ const AddAJob = () => {
     if (jobCategory === "") {
       return toast.error("Please provide jobCategory");
     }
-    if (minimumSalary === "") {
-      return toast.error("Please provide minimumSalary");
+    if (minimumSalaryString === "") {
+      return toast.error("Please provide minimum salary");
     }
-    if (maximumSalary === "") {
-      return toast.error("Please provide maximumSalary");
+    if (minimumSalary <= 0) {
+      return toast.error("Salary must be greater than or equal to 0");
+    }
+    if (maximumSalaryString === "") {
+      return toast.error("Please provide maximum salary");
+    }
+    if (maximumSalary <= 0) {
+      return toast.error("Salary must be greater than or equal to 0");
     }
     if (jobDescription === "") {
       return toast.error("Please provide job description");
@@ -159,9 +169,9 @@ const AddAJob = () => {
                   <div className="w-full mt-4">
                     <p className="text-lg font-medium mb-2">Job Deadline</p>
                     <DatePicker
-                      className="py-2  w-[264px] lg:w-[370px] border rounded-lg px-4 bg-transparent placeholder:text-[#e6e6e6]"
                       selected={deadline}
                       onChange={(date) => setDeadline(date)}
+                      className="py-2  w-[264px] lg:w-[370px] border rounded-lg px-4 bg-transparent placeholder:text-[#e6e6e6]"
                     />
                   </div>
                 </div>
@@ -181,11 +191,10 @@ const AddAJob = () => {
                     <select
                       onChange={handleCatChange}
                       name="jobCategory"
+                      defaultValue={"Select Job Category"}
                       className="input w-full h-[40px]  px-4 input-bordered  bg-[#18181be3]   border-white "
                     >
-                      <option disabled selected>
-                        Select Job Category
-                      </option>
+                      <option disabled>Select Job Category</option>
                       <option>On Site</option>
                       <option>Full Time</option>
                       <option>Remote</option>
@@ -209,7 +218,7 @@ const AddAJob = () => {
                     <input
                       type="text"
                       name="jobApplicantsNumber"
-                      value={0}
+                      defaultValue={0}
                       className="py-2  w-full border rounded-lg px-4 bg-transparent placeholder:text-[#e6e6e6]"
                     />
                   </div>
@@ -243,7 +252,7 @@ const AddAJob = () => {
             </form>
           </div>
         </div>
-        <div className=" w-1/2 md:w-1/3 mx-auto ">
+        <div className=" w-full md:w-1/3 mx-auto ">
           <div className="w-[150px] mx-auto">
             <Lottie animationData={fillForm} />
           </div>

@@ -1,3 +1,4 @@
+
 const NewsLetter = () => {
     return (
         <div className="bg-[url('https://i.ibb.co/FbV0dTM/newletterbg.jpg')] bg-cover bg-no-repeat rounded-xl text-center p-5 md:p-10">

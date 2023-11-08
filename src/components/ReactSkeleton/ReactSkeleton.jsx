@@ -27,7 +27,7 @@ const ReactSkeleton = ({ cards }) => {
             </div>
             <div>
               <div className="w-1/2">
-                <Skeleton baseColor="#bebebe36" highlightColor="#c2c2c24b" count={3} style={{ marginBottom: ".6rem" }} />
+                <Skeleton baseColor="#bebebe36" highlightColor="#c2c2c24b" count={4} style={{ marginBottom: ".6rem" }} />
               </div>
               <button className="mt-2 w-[120px] rounded-xl">
                 <Skeleton baseColor="#bebebe36" highlightColor="#c2c2c24b" height={30} />

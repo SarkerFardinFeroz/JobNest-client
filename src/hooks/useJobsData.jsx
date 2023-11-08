@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "./useAxiosSecure";
 
-const useJobsTabsData = () => {
+const useJobsData = () => {
   const axiosSecure = useAxiosSecure();
   const { isLoading, isFetching, data,refetch } = useQuery({
     queryKey: ["jobsDataOnTabs"],
@@ -17,4 +17,4 @@ const useJobsTabsData = () => {
   return { data, isLoading, isFetching,refetch };
 };
 
-export default useJobsTabsData;
+export default useJobsData;

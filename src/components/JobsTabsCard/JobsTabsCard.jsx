@@ -13,9 +13,10 @@ const JobsTabsCard = ({ job }) => {
     jobApplicantsNumber,
     jobApplicationDeadline,
     jobLocation,
+    jobPostingDate
   } = job || {};
   return (
-    <div className=" lg:h-[300px] p-3 md:p-6 rounded-lg duration-300 hover:bg-[#7a4aff] bg-[#eeeaff] hover:text-white dark:bg-[#322942] dark:hover:bg-[#7a4aff] ">
+    <div className=" lg:h-[320px] p-3 md:p-6 rounded-lg duration-300 hover:bg-[#7a4aff] bg-[#eeeaff] hover:text-white dark:bg-[#322942] dark:hover:bg-[#7a4aff] ">
       <div className="flex flex-col">
         <div className="flex-1 flex flex-col  ">
           <div className="md:flex gap-4 items-center  ">
@@ -35,7 +36,7 @@ const JobsTabsCard = ({ job }) => {
             <button className="py-[2px] px-4 text-center text-sm bg-[#eafee7] text-[#258412] rounded-xl">
               Active
             </button>
-            <button className="py-[2px] justify-center  flex-1 text-center px-4 text-sm  bg-[#fefee7] text-[#847c12] rounded-xl flex items-center gap-1">
+            <button className="py-[2px] justify-center  flex-1 text-center px-4 text-sm  mt-2 md:mt-0 bg-[#fefee7] text-[#847c12] rounded-xl flex items-center gap-1">
               <span className="text-lg">
                 <CiLocationOn />
               </span>
@@ -46,6 +47,9 @@ const JobsTabsCard = ({ job }) => {
         <div className=" ">
           <p className="text-sm font-medium mt-4">
             Job Applicants Number : {jobApplicantsNumber}
+          </p>
+          <p className="text-sm font-medium mt-1">
+            Posted On : {jobPostingDate}
           </p>
           <p className="text-sm font-medium mt-1">
             Deadline : {jobApplicationDeadline}

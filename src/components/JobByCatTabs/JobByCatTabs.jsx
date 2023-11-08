@@ -3,11 +3,11 @@ import "react-tabs/style/react-tabs.css";
 
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
-import useJobsTabsData from "../../hooks/useJobsTabsData";
+import useJobsData from "../../hooks/useJobsData";
 import JobsTabsCard from "../JobsTabsCard/JobsTabsCard";
 import ReactSkeleton from "../ReactSkeleton/ReactSkeleton";
 const JobByCatTabs = () => {
-  const { data, isLoading, isFetching } = useJobsTabsData();
+  const { data, isLoading, isFetching } = useJobsData();
   const [isAll, setIsAll] = useState(false);
   const [category, setCategory] = useState([]);
   const [OnSite, setOnSite] = useState([]);
@@ -77,9 +77,7 @@ const JobByCatTabs = () => {
           <div className="grid  md:grid-cols-2 lg:grid-cols-3 gap-4 p-3">
             {isAll
               ? data?.map((job, idx) => <JobsTabsCard key={idx} job={job} />)
-              : data
-                  ?.slice(0, 6)
-                  .map((job, idx) => <JobsTabsCard key={idx} job={job} />)}
+              : data?.slice(0, 6).map((job, idx) => <JobsTabsCard key={idx} job={job} />)}
           </div>
           <div>
             <div className="flex justify-center items-center">

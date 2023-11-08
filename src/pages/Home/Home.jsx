@@ -24,14 +24,14 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="bg-[#45169c] p-12 mt-[100px]  text-center ">
+        <div className="bg-[#45169c] pt-12  md:p-12 mt-[100px]  text-center ">
           <h2 className="font-bold text-2xl md:text-3xl mb-4 text-white">
             Why Our Clients Admire Us
           </h2>
           <p className="text-[#96b5d5] text-sm mb-20 ">
             Testimonials that Showcase our Exceptional Service and Dedication
           </p>
-          <div className="text-start max-w-[1304px] py-4 mx-auto gap-6">
+          <div className="text-start max-w-[1304px] px-4 py-4 mx-auto gap-6">
             <Testimonial />
           </div>
         </div>
