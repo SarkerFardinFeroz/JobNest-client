@@ -7,10 +7,10 @@ import AllJobsTabuler from "./AllJobsTabuler";
 import { FiSearch } from "react-icons/fi";
 import SkeletonAllJobPage from "../../components/SkeletonAllJobPage/SkeletonAllJobPage";
 
-import emptyData from "../../assets/lottie/Empthydata.json"
+import emptyData from "../../assets/lottie/Empthydata.json";
 import Lottie from "lottie-react";
 const AllJobs = () => {
-  const { data, isLoading,isFetching  } = useJobsData();
+  const { data, isLoading, isFetching } = useJobsData();
   const [isAll, setIsAll] = useState(false);
   const [filteredData, setFilteredData] = useState(data);
   const [searchText, setSearchText] = useState("");
@@ -61,19 +61,19 @@ const AllJobs = () => {
             </div>
             <div className="overflow-x-auto w-full pt-5 rounded-xl ">
               <table className="table w-full">
-                {/* head */}
-
                 <tbody className="rounded-xl">
                   <div className=" flex flex-col gap-4 p-3">
                     {isLoading === true || isFetching === true ? (
                       <div>
-                        <SkeletonAllJobPage cards={10}/> 
+                        <SkeletonAllJobPage cards={10} />
                       </div>
-                    ) : filteredData?.length ===0 ? (
-                      <div className="w-96 mx-auto"> <Lottie animationData={emptyData}/>
-                      <p className="text-center">No results found. Please refine your search.</p>
-                       </div>
-
+                    ) : filteredData?.length === 0 ? (
+                      <div className="w-96 mx-auto">
+                        <Lottie animationData={emptyData} />
+                        <p className="text-center">
+                          No results found. Please refine your search.
+                        </p>
+                      </div>
                     ) : (
                       filteredData
                         ?.slice(0, 10)

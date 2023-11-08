@@ -11,6 +11,7 @@ import Register from "../pages/Register/Register";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import PrivetRoute from "./PrivetRoute";
 import JobDetails from "../pages/JobDetailsPage/JobDetails";
+import JobUpdate from "../pages/JobUpdate/JobUpdate";
 
 const router = createBrowserRouter([
   {
@@ -48,8 +49,18 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/update-job/:id",
+        element: (
+          <PrivetRoute>
+            <JobUpdate />
+          </PrivetRoute>
+        ),loader: ({ params }) =>fetch(`http://localhost:5000/job-details/${params.id}`),
+        
+      },
+      {
         path: "/my-jobs",
         element: <MyJobs />,
+        
       },
       {
         path: "/blogs",

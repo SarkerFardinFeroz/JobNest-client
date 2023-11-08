@@ -29,7 +29,7 @@ const JobsTabsCard = ({ job }) => {
             </div>
             <div>
               <p className="text-sm">{authorName}</p>
-              <h3 className="text-xl font-semibold">{jobTitle}</h3>
+              <h3 className="text-xl font-semibold truncate overflow-hidden w-[200px]">{jobTitle}</h3>
             </div>
           </div>
           <div className="md:flex flex-1  items-center mt-4 gap-3">

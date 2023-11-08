@@ -18,7 +18,9 @@ const JobDetail = ({ job }) => {
     jobLocation,
     jobPostingDate,
   } = job || {};
-  console.log(job);
+//   console.log(job);
+  const date = new Date () > new Date(jobApplicationDeadline)
+  
   return (
     <div className="pb-30 pt-10">
       <div className=" pb-[80px] relative">
@@ -39,8 +41,10 @@ const JobDetail = ({ job }) => {
             <button className=" text-center  py-[2px] px-4 text-sm  bg-[#eadef7] text-[#561284] rounded-xl">
               {jobCategory}
             </button>
-            <button className="py-[2px] ml-2 md:ml-0 px-4 text-center text-sm bg-[#eafee7] text-[#258412] rounded-xl">
-              Active
+            <button className={`py-[2px]
+            ${date === false ? " bg-[#eafee7] text-[#258412]" : "bg-[#832828] text-[#ffd7d7]" }
+            ml-2 md:ml-0 px-4 text-center text-sm bg-[#eafee7] text-[#258412] rounded-xl`}>
+              {date === false ? "Active" : "Expired" }
             </button>
             <button className="py-[2px]   justify-center   text-center px-4 text-sm  mt-2 md:mt-0 bg-[#fefee7] text-[#847c12] rounded-xl flex items-center gap-1">
               <span className="text-lg ">
