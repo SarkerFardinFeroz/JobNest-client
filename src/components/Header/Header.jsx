@@ -9,7 +9,6 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { user, logOut } = useContext(AuthContext);
  const location = useLocation()
-//  console.log(location.pathname);
   const handleSignOut = () => {
     logOut().then().catch();
   };

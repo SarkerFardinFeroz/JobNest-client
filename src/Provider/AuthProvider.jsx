@@ -57,7 +57,6 @@ import auth from "../firebase/firebase.config";
         unsubscribe();
       };
     }, []);
-  // console.log(user);
     const authInfo = {
       user,
       googleLogin,
@@ -67,6 +66,7 @@ import auth from "../firebase/firebase.config";
       logOut,
       handleUpdateProfile,
     };
+
     return (
       <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
     );

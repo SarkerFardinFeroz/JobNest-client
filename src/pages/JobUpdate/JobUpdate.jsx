@@ -16,7 +16,7 @@ const JobUpdate = () => {
   const [deadline, setDeadline] = useState(new Date());
   const loadedData = useLoaderData();
   const [data, setData] = useState(loadedData);
-  console.log(data);
+
   const {
     _id,
     logoURL,
@@ -33,6 +33,7 @@ const JobUpdate = () => {
     jobPostingDate,
   } = data || {};
 
+ 
   const [cat, setCat] = useState("");
   const axiosSecure = useAxiosSecure();
 

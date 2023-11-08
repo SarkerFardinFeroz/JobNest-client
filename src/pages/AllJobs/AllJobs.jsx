@@ -6,9 +6,9 @@ import useJobsData from "../../hooks/useJobsData";
 import AllJobsTabuler from "./AllJobsTabuler";
 import { FiSearch } from "react-icons/fi";
 import SkeletonAllJobPage from "../../components/SkeletonAllJobPage/SkeletonAllJobPage";
-
-import emptyData from "../../assets/lottie/Empthydata.json";
 import Lottie from "lottie-react";
+import emptyData from "../../assets/lottie/Empthydata.json";
+
 const AllJobs = () => {
   const { data, isLoading, isFetching } = useJobsData();
   const [isAll, setIsAll] = useState(false);
@@ -74,13 +74,9 @@ const AllJobs = () => {
                           No results found. Please refine your search.
                         </p>
                       </div>
-                    ) : (
-                      filteredData
-                        ?.slice(0, 10)
-                        .map((job, idx) => (
-                          <AllJobsTabuler key={idx} job={job} />
-                        ))
-                    )}
+                    ) : isAll
+                    ? filteredData?.map((job, idx) => <AllJobsTabuler key={idx} job={job} />)
+                    : filteredData?.slice(0, 10).map((job, idx) => <AllJobsTabuler key={idx} job={job} />)}
                   </div>
                 </tbody>
                 <div className="mt-4">

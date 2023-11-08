@@ -212,7 +212,7 @@ const AddAJob = () => {
                       className="input w-full h-[40px]  px-4 input-bordered  bg-[#18181be3]   border-white "
                     >
                       <option disabled selected>Select Job Category</option>
-                      <option >Select Job Category</option>
+                    
                       <option>On Site</option>
                       <option>Full Time</option>
                       <option>Remote</option>

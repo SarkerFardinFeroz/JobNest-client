@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Banner from "../../components/Banner/Banner";
 import NewsLetter from "../../components/NewsLetter/NewsLetter";
 import PageTransition from "../../components/PageTransition/PageTransition";
@@ -8,30 +8,35 @@ import MyJobsTabuler from "../../components/MyJobsTabuler/MyJobsTabuler";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
-import axios from "axios";
+import SkeletonAllJobPage from "../../components/SkeletonAllJobPage/SkeletonAllJobPage";
+import Lottie from "lottie-react";
+import emptyData from "../../assets/lottie/Empthydata.json";
 
 const MyJobs = () => {
-  // const [jobs, setJobs] = useState([]);
+  
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const text1 = "My Jobs";
   const text2 = "";
 
   const myJobsData = async () => {
-    const response = await axios.get(`http://localhost:5000/my-jobs?email=${user.email}`);
+    const response = await axiosSecure.get(
+      `/my-jobs?email=${user.email}`
+    );
     return response.data;
   };
   const {
     data: jobs,
     isLoading,
+    isFetching,
     refetch,
   } = useQuery({
     queryKey: ["my-job"],
     queryFn: myJobsData,
-    enabled: !!user.email
+    enabled: !!user.email,
   });
 
-  const handleDelete = (id) => {
+  const handleDeleteJob = (id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -43,7 +48,7 @@ const MyJobs = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         refetch();
-        axiosSecure.delete(`/job/${id}`).then((res) => {
+        axiosSecure.delete(`/jobs/${id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             toast.success("Successfully job deleted");
           }
@@ -62,18 +67,31 @@ const MyJobs = () => {
           <table className="table w-full">
             <tbody className="rounded-xl">
               <div className=" flex flex-col gap-4 p-3">
-                {jobs?.slice(0, 10).map((job, idx) => (
-                  <MyJobsTabuler
-                    key={idx}
-                    job={job}
-                    handleDelete={handleDelete}
-                  />
-                ))}
+                {isLoading === true || isFetching === true ? (
+                  <div>
+                    <SkeletonAllJobPage cards={10} />
+                  </div>
+                ) : jobs?.length === 0 ? (
+                  <div className="w-96 mx-auto">
+                    <Lottie animationData={emptyData} />
+                    <p className="text-center">Post jobs to see data here.</p>
+                  </div>
+                ) : (
+                  jobs?.map((job, idx) => (
+                    <MyJobsTabuler
+                      key={idx}
+                      job={job}
+                      handleDeleteJob={handleDeleteJob}
+                    />
+                  ))
+                )}
               </div>
             </tbody>
           </table>
         </div>
       </div>
+
+     
 
       <div className="max-w-[1304px] py-16 px-4 mx-auto ">
         <NewsLetter />
