@@ -3,12 +3,11 @@ import Banner from "../../components/Banner/Banner";
 import PageTransition from "../../components/PageTransition/PageTransition";
 import { format } from "date-fns";
 import updateForm from "../../assets/lottie/update.json";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import Swal from "sweetalert2";
-import useJobsData from "../../hooks/useJobsData";
+
 import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
 
@@ -16,8 +15,10 @@ const JobUpdate = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [deadline, setDeadline] = useState(new Date());
   const loadedData = useLoaderData();
-  const [data,setData]= useState(loadedData)
+  const [data, setData] = useState(loadedData);
+  console.log(data);
   const {
+    _id,
     logoURL,
     pictureUrl,
     jobTitle,
@@ -34,7 +35,7 @@ const JobUpdate = () => {
 
   const [cat, setCat] = useState("");
   const axiosSecure = useAxiosSecure();
- 
+
   const text1 = "Post A Job";
   const text2 = "";
   const handleCatChange = (e) => {
@@ -81,9 +82,9 @@ const JobUpdate = () => {
     if (authorName === "") {
       return toast.error("Please provide author name ");
     }
-    // if (jobCategory === "") {
-    //   return toast.error("Please provide jobCategory");
-    // }
+    if (jobCategory === "") {
+      return toast.error("Please provide jobCategory");
+    }
     if (minimumSalaryString === "") {
       return toast.error("Please provide minimum salary");
     }
@@ -109,6 +110,7 @@ const JobUpdate = () => {
       return toast.error("Please provide job application deadline");
     }
     const updatedJob = {
+      _id,
       pictureUrl,
       logoURL,
       jobTitle,
@@ -122,12 +124,11 @@ const JobUpdate = () => {
       jobApplicantsNumber,
       jobDescription,
     };
-    axiosSecure.put(`/jobs/${"_id"}`, updatedJob).then((res) => {
-        if (data.modifiedCount > 0) {
-            
-            toast.success('Product Updated Successfully')
-            setData(updatedJob);
-          }
+    axiosSecure.put(`/jobs/${_id}`, updatedJob).then((res) => {
+      if (res.data.modifiedCount > 0) {
+        toast.success("Product Updated Successfully");
+        setData(updatedJob);
+      }
     });
   };
 
@@ -216,11 +217,9 @@ const JobUpdate = () => {
                     <select
                       onChange={handleCatChange}
                       name="jobCategory"
-                      defaultValue={jobCategory}
                       className="input w-full h-[40px]  px-4 input-bordered  bg-[#18181be3]   border-white "
-                      
                     >
-                      <option disabled>Select Job Category</option>
+                      <option disabled>{jobCategory}</option>
                       <option>On Site</option>
                       <option>Full Time</option>
                       <option>Remote</option>

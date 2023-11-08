@@ -2,7 +2,9 @@ import PropTypes from "prop-types";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
 import { Link } from "react-router-dom";
-const MyJobsTabuler = ({ job }) => {
+
+const MyJobsTabuler = (data, handleDelete) => {
+  const job = data.job; 
   const {
     _id,
     jobTitle,
@@ -15,12 +17,6 @@ const MyJobsTabuler = ({ job }) => {
     jobPostingDate,
   } = job || {};
   const date = new Date() > new Date(jobApplicationDeadline);
-
-const handleDeleteJob = ()=>{
-  
-}
-
-
 
   return (
     <tr className="bg-[#eeeaff] md:py-2 dark:bg-[#322942] rounded-lg  grid xl:grid-cols-8 text-center lg:text-start ">
@@ -64,15 +60,18 @@ const handleDeleteJob = ()=>{
         </div>
       </td>
       <th className="flex lg:w-[200px]  items-center gap-2 justify-center  ">
-        <button className="text-center  py-[10px] px-6  lg:py-[6px] lg:px-4 text-sm  bg-[#c92727] shadow-sm text-[#eadef7] rounded-xl font-normal gap-2 items-center  duration-300 active:scale-95 flex">
-          Delete{" "}
+        <button
+          onClick={()=>handleDelete(_id)}
+          className="text-center  py-[10px] px-6  lg:py-[6px] lg:px-4 text-sm  bg-[#c92727] shadow-sm text-[#eadef7] rounded-xl font-normal gap-2 items-center  duration-300 active:scale-95 flex"
+        >
+          Delete
           <span className="text-lg">
             <AiOutlineDelete />
           </span>
         </button>
         <Link to={`/update-job/${_id}`}>
           <button className="text-center  py-[10px] px-6  lg:py-[6px] lg:px-4 text-sm bg-[#2747ff]  shadow-sm text-[#eadef7] rounded-xl font-normal gap-2 items-center  duration-300 active:scale-95 flex ">
-            Update{" "}
+            Update
             <span className="text-lg">
               <FiEdit2 />
             </span>
@@ -84,5 +83,6 @@ const handleDeleteJob = ()=>{
 };
 MyJobsTabuler.propTypes = {
   job: PropTypes.object,
+  handleDelete: PropTypes.func,
 };
 export default MyJobsTabuler;

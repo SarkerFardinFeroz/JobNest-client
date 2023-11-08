@@ -18,7 +18,7 @@ const JobDetail = ({ job }) => {
     jobLocation,
     jobPostingDate,
   } = job || {};
-//   console.log(job);
+
   const date = new Date () > new Date(jobApplicationDeadline)
   
   return (

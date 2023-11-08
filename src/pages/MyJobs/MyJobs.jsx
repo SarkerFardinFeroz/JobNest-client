@@ -5,19 +5,53 @@ import PageTransition from "../../components/PageTransition/PageTransition";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { AuthContext } from "../../Provider/AuthProvider";
 import MyJobsTabuler from "../../components/MyJobsTabuler/MyJobsTabuler";
+import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const MyJobs = () => {
-  const [jobs, setJobs] = useState([]);
+  // const [jobs, setJobs] = useState([]);
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const text1 = "My Jobs";
   const text2 = "";
-  useEffect(() => {
-    axiosSecure(`/my-jobs?email=${user.email}`).then((res) => {
-      setJobs(res.data);
+
+  const myJobsData = async () => {
+    const response = await axios.get(`http://localhost:5000/my-jobs?email=${user.email}`);
+    return response.data;
+  };
+  const {
+    data: jobs,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["my-job"],
+    queryFn: myJobsData,
+    enabled: !!user.email
+  });
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#2747ff",
+      cancelButtonColor: "#c92727",
+      confirmButtonText: "Yes, delete it",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        refetch();
+        axiosSecure.delete(`/job/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            toast.success("Successfully job deleted");
+          }
+        });
+      }
     });
-  }, [axiosSecure,user.email]);
-  console.log(jobs);
+  };
+
   return (
     <PageTransition>
       <div className="mt-[-70px]">
@@ -29,7 +63,11 @@ const MyJobs = () => {
             <tbody className="rounded-xl">
               <div className=" flex flex-col gap-4 p-3">
                 {jobs?.slice(0, 10).map((job, idx) => (
-                  <MyJobsTabuler key={idx} job={job} />
+                  <MyJobsTabuler
+                    key={idx}
+                    job={job}
+                    handleDelete={handleDelete}
+                  />
                 ))}
               </div>
             </tbody>
