@@ -1,13 +1,14 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Provider/AuthProvider";
 const Register = () => {
+  const location = useLocation()
   const [isShow, setShow] = useState(false);
   const { createUser, googleLogin, handleUpdateProfile } =
-    useContext(AuthContext);
+  useContext(AuthContext);
   const navigate = useNavigate();
   const handleRegister = (e) => {
     e.preventDefault();
@@ -48,7 +49,7 @@ const Register = () => {
     media()
       .then((res) => {
         toast.success("User Logged in Successfully!");
-        navigate("/");
+        navigate(location?.state ? location.state : "/");
       })
       .catch((error) => toast.error("Popup closed"));
   };

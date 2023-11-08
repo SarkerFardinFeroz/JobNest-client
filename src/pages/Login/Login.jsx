@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useContext, useState } from "react";
@@ -7,6 +7,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 const Login = () => {
   const [isShow, setShow] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation()
   const { signInUser, googleLogin } = useContext(AuthContext);
   const handleLogin = (e) => {
     const toastId = toast.loading('Logging...')
