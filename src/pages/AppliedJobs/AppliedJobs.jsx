@@ -17,24 +17,30 @@ const AppliedJobs = () => {
     const response = await axiosSecure.get(`/applied?email=${user.email}`);
     return response.data;
   };
-  const { data, isLoading, refetch } = useQuery({
+  const {data,isLoading}  = useQuery({
     queryKey: ["my-job"],
     queryFn: myAppliedJobs,
     enabled: !!user.email,
   });
 
   const [category, setCategory] = useState([]);
+  const [All, setAll] = useState([]);
   const [FullTime, setFullTime] = useState([]);
   const [Hybrid, setHybrid] = useState([]);
   const [OnSite, setOnSite] = useState([]);
   const [Remote, setRemote] = useState([]);
   const [PartTime, setPartTime] = useState([]);
 
-  // console.log(data);
+  console.log(data);
   const url = "/category";
   useEffect(() => {
     axiosSecure.get(url).then((res) => setCategory(res.data));
   }, [axiosSecure, url]);
+  useEffect(() => {
+    
+    setAll(data);
+    
+  }, [data]);
   useEffect(() => {
     if (data) {
       const filteredData = data.filter(
@@ -84,6 +90,11 @@ const AppliedJobs = () => {
     }
   }, [data]);
 
+
+
+
+
+
   return (
     <PageTransition>
       <div className="duration-0  ">
@@ -106,14 +117,14 @@ const AppliedJobs = () => {
               </TabList>
               <TabPanel>
                 <div className=" grid lg:flex md:grid-cols-2 flex-col  gap-6 lg:gap-0 p-3">
-                  {data?.map((job, idx) => (
+                  {All?.map((job, idx) => (
                     <AppliedJob key={idx} job={job} />
-                  ))}
+                   ))} 
                 </div>
               </TabPanel>
               <TabPanel>
                 {" "}
-                <div className="grid lg:flex grid-cols-2   gap-6 p-3">
+                <div className="grid lg:flex md:grid-cols-2 flex-col  gap-6 lg:gap-0 p-3">
                   {OnSite?.map((job, idx) => (
                     <AppliedJob key={idx} job={job} />
                   ))}
@@ -121,7 +132,7 @@ const AppliedJobs = () => {
               </TabPanel>
               <TabPanel>
                 {" "}
-                <div className="grid lg:flex grid-cols-2   gap-6 p-3">
+                <div className="grid lg:flex md:grid-cols-2 flex-col  gap-6 lg:gap-0 p-3">
                   {FullTime?.map((job, idx) => (
                     <AppliedJob key={idx} job={job} />
                   ))}
@@ -129,14 +140,14 @@ const AppliedJobs = () => {
               </TabPanel>
               <TabPanel>
                 {" "}
-                <div className="grid lg:flex grid-cols-2   gap-6 p-3">
+                <div className="grid lg:flex md:grid-cols-2 flex-col  gap-6 lg:gap-0 p-3">
                   {Remote?.map((job, idx) => (
                     <AppliedJob key={idx} job={job} />
                   ))}
                 </div>
               </TabPanel>
               <TabPanel>
-                <div className="grid lg:flex grid-cols-2   gap-6 p-3">
+                <div className="grid lg:flex md:grid-cols-2 flex-col  gap-6 lg:gap-0 p-3">
                   {Hybrid?.map((job, idx) => (
                     <AppliedJob key={idx} job={job} />
                   ))}
@@ -144,7 +155,7 @@ const AppliedJobs = () => {
               </TabPanel>
               <TabPanel>
                 {" "}
-                <div className="grid lg:flex grid-cols-2   gap-6 p-3">
+                <div className="grid lg:flex md:grid-cols-2 flex-col  gap-6 lg:gap-0 p-3">
                   {PartTime?.map((job, idx) => (
                     <AppliedJob key={idx} job={job} />
                   ))}

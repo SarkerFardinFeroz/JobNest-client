@@ -16,7 +16,7 @@ const AllJobsTabuler = ({ job }) => {
   return (
     <tr className="bg-[#eeeaff] md:py-2 dark:bg-[#322942] rounded-lg  grid xl:grid-cols-8 text-center lg:text-start ">
       <th className=" flex items-center justify-center text-center lg:w-[200px]    text-[#784aff] ">
-        <p>{authorName}</p>
+        <p className="">{authorName}</p>
       </th>
       <th className="  flex items-center justify-center lg:text-start overflow-hidden">
         <p className="lg:max-w-[280px]  truncate">{jobTitle}</p>

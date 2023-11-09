@@ -68,8 +68,11 @@ const JobDetail = ({ job, refetch }) => {
           resume: result.value,
         };
         axiosSecure
-          .post(`/applied`, application)
+          .post(`/applied/${_id}`, application)
           .then((res) => toast.success("Applied successfully Email has been sent"));
+
+
+          
         axiosSecure.put(`/apply/${_id}`).then((res) => console.log(res));
         emailjs.send(
               "service_ubspfst",

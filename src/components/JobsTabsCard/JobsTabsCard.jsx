@@ -22,14 +22,14 @@ const JobsTabsCard = ({ job }) => {
       <div className="flex flex-col">
         <div className="flex-1 flex flex-col  ">
           <div className="md:flex gap-4 items-center  ">
-            <div className="bg-white rounded-xl p-1">
+            <div className="bg-white rounded-xl p-1 w-max">
             <img
               className="w-[60px] h-[60px] rounded-xl object-cover"
               src={logoURL}
             />
             </div>
             <div>
-              <p className="text-sm">{authorName}</p>
+              <p className="text-sm pt-2 lg:pt-0">{authorName}</p>
               <h3 className="text-xl font-semibold truncate overflow-hidden w-[200px]">{jobTitle}</h3>
             </div>
           </div>
