@@ -8,9 +8,9 @@ import { AuthContext } from "../../Provider/AuthProvider";
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { user, logOut } = useContext(AuthContext);
- const location = useLocation()
+  const location = useLocation();
   const handleSignOut = () => {
-    logOut().then().catch();
+    logOut().then().catch()
   };
   useEffect(() => {
     const handleScroll = () => {
@@ -26,7 +26,6 @@ const Header = () => {
 
   const navLinks = (
     <>
-      
       <li className="py-1 border-b lg:border-none focus:bg-transparent">
         <div className="hover:bg-transparent p-0 dark:hover:text-white ">
           <NavLink to={"/"}>Home</NavLink>
@@ -70,7 +69,11 @@ const Header = () => {
       className={`  duration-500 z-50 sticky top-0  ${
         isScrolled
           ? " bg-white dark:bg-[#00000086]  shadow-md backdrop-blur-xl text-back "
-          : `${location.pathname.includes('/job-details')? "text-black dark:text-white  border-b border-[#11111123] dark:border-[#292929] ":"text-white "}}`   
+          : `${
+              location.pathname.includes("/job-details")
+                ? "text-black dark:text-white  border-b border-[#11111123] dark:border-[#292929] "
+                : "text-white "
+            }}`
       } `}
     >
       <nav className="navbar max-w-[1304px] py-0  px-4 mx-auto">

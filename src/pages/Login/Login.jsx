@@ -1,37 +1,44 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { useContext, useState } from "react";
-import toast from "react-hot-toast";
+import { useContext, useEffect, useRef, useState } from "react";
+import toast, { ErrorIcon } from "react-hot-toast";
 import { AuthContext } from "../../Provider/AuthProvider";
 const Login = () => {
   const [isShow, setShow] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
   const { signInUser, googleLogin } = useContext(AuthContext);
+  const toastRef = useRef(false);
+  useEffect(() => {
+    if (!toastRef.current) {
+      toast.error("You must login to visit this page");
+      toastRef.current = true;
+    }
+  }, []);
+
   const handleLogin = (e) => {
-    const toastId = toast.loading('Logging...')
+    const toastId = toast.loading("Logging...");
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
     signInUser(email, password)
       .then((res) => {
-        toast.success("User logged in successfully!",{id:toastId});
+        toast.success("Account logged in successfully!", { id: toastId });
         navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
-        toast.error(error.message,{id:toastId});
+        toast.error(error.message, { id: toastId });
       });
   };
-  const handleSocialLogin = () => {
-    const toastId = toast.loading('Logging...')
-    googleLogin()
+  const handleSocialLogin = (media) => {
+    media()
       .then((res) => {
-        toast.success("User logged in successfully!",{id:toastId});
+        toast.success("Account Logged in Successfully!");
         navigate(location?.state ? location.state : "/");
       })
-      .catch((error) => toast.error("Popup closed",{id:toastId}));
+      .catch((error) => console.error(error));
   };
   return (
     <div className="relative">
@@ -56,7 +63,7 @@ const Login = () => {
 
               <div className="mt-5">
                 <button
-                  onClick={handleSocialLogin}
+                  onClick={() => handleSocialLogin(googleLogin)}
                   type="button"
                   className="w-full py-2 md:py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium dark:text-white  dark:bg-black bg-[#eeeeeee0] backdrop-blur-lg text-sm text-gray-700 shadow-sm align-middle hover:bg-gray-50  border-black  transition-all  "
                 >

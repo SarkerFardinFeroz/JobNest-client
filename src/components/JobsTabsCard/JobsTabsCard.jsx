@@ -16,6 +16,7 @@ const JobsTabsCard = ({ job }) => {
     jobLocation,
     jobPostingDate
   } = job || {};
+  const date = new Date() > new Date(jobApplicationDeadline);
   return (
     <div className=" lg:h-[340px] p-3 md:p-6 rounded-lg duration-300 hover:bg-[#7a4aff] bg-[#eeeaff] hover:text-white dark:bg-[#322942] dark:hover:bg-[#7a4aff] ">
       <div className="flex flex-col">
@@ -36,9 +37,18 @@ const JobsTabsCard = ({ job }) => {
             <button className=" text-center  py-[2px] px-4 text-sm  bg-[#eadef7] text-[#561284] rounded-xl">
               {jobCategory}
             </button>
-            <button className="py-[2px] px-4 text-center text-sm bg-[#eafee7] text-[#258412] rounded-xl">
-              Active
+            <button
+              className={`py-[2px] 
+             ${
+               date === false
+                 ? " bg-[#eafee7] text-[#258412]"
+                 : "bg-[#832828] text-[#ffd7d7]"
+             }
+            ml-2 md:ml-0 px-4 text-center text-sm rounded-xl`}
+            >
+              {date === false ? "Active" : "Expired"}
             </button>
+           
             <button className="py-[2px] justify-center  flex-1 text-center px-4 text-sm  mt-2 md:mt-0 bg-[#fefee7] text-[#847c12] rounded-xl flex items-center gap-1">
               <span className="text-lg">
                 <CiLocationOn />

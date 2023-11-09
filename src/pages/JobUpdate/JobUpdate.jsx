@@ -13,9 +13,9 @@ import { useLoaderData } from "react-router-dom";
 
 const JobUpdate = () => {
   const [startDate, setStartDate] = useState(new Date());
-  const [deadline, setDeadline] = useState(new Date());
   const loadedData = useLoaderData();
   const [data, setData] = useState(loadedData);
+  const [deadline, setDeadline] = useState(new Date());
 
   const {
     _id,

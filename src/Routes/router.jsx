@@ -29,7 +29,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/applied-jobs",
-        element: <AppliedJobs />,
+        element: (
+          <PrivetRoute>
+            <AppliedJobs />
+          </PrivetRoute>
+        ),
       },
       {
         path: "/job-details/:id",
@@ -38,7 +42,8 @@ const router = createBrowserRouter([
             <JobDetails />
           </PrivetRoute>
         ),
-        loader: ({ params }) =>fetch(`http://localhost:5000/job-details/${params.id}`),
+        loader: ({ params }) =>
+          fetch(`https://job-nest-server-ten.vercel.app/job-details/${params.id}`),
       },
       {
         path: "/add-job",
@@ -54,13 +59,17 @@ const router = createBrowserRouter([
           <PrivetRoute>
             <JobUpdate />
           </PrivetRoute>
-        ),loader: ({ params }) =>fetch(`http://localhost:5000/job-details/${params.id}`),
-        
+        ),
+        loader: ({ params }) =>
+          fetch(`https://job-nest-server-ten.vercel.app/job-details/${params.id}`),
       },
       {
         path: "/my-jobs",
-        element: <MyJobs />,
-        
+        element: (
+          <PrivetRoute>
+            <MyJobs />
+          </PrivetRoute>
+        ),
       },
       {
         path: "/blogs",

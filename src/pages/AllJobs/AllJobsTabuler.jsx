@@ -37,7 +37,7 @@ const AllJobsTabuler = ({ job }) => {
           </button>
           <button
             className={`py-[2px] ${date === false? " bg-[#eafee7] text-[#258412]":"bg-[#832828] text-[#ffd7d7] "} ml-2 md:ml-0 px-4 text-center text-sm  rounded-xl`}>
-            {date === true ? "Active" : "Expired"}
+            {date === false ? "Active" : "Expired"}
           </button>
         </div>
       </td>

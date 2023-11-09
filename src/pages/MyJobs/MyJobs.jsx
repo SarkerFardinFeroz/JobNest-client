@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Banner from "../../components/Banner/Banner";
 import NewsLetter from "../../components/NewsLetter/NewsLetter";
 import PageTransition from "../../components/PageTransition/PageTransition";
@@ -13,22 +13,18 @@ import Lottie from "lottie-react";
 import emptyData from "../../assets/lottie/Empthydata.json";
 
 const MyJobs = () => {
-  
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const text1 = "My Jobs";
   const text2 = "";
 
   const myJobsData = async () => {
-    const response = await axiosSecure.get(
-      `/my-jobs?email=${user.email}`
-    );
+    const response = await axiosSecure.get(`/my-jobs?email=${user.email}`);
     return response.data;
   };
   const {
     data: jobs,
     isLoading,
-    isFetching,
     refetch,
   } = useQuery({
     queryKey: ["my-job"],
@@ -67,7 +63,7 @@ const MyJobs = () => {
           <table className="table w-full">
             <tbody className="rounded-xl">
               <div className=" flex flex-col gap-4 p-3">
-                {isLoading === true || isFetching === true ? (
+                {isLoading === true ? (
                   <div>
                     <SkeletonAllJobPage cards={10} />
                   </div>
@@ -90,8 +86,6 @@ const MyJobs = () => {
           </table>
         </div>
       </div>
-
-     
 
       <div className="max-w-[1304px] py-16 px-4 mx-auto ">
         <NewsLetter />

@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://job-nest-server-ten.vercel.app",
   withCredentials: true,
 });
 

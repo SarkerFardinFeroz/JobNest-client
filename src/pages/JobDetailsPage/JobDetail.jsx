@@ -1,12 +1,14 @@
 import PropTypes from "prop-types";
 import { CiLocationOn } from "react-icons/ci";
 import { AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
+import { RxCross2 } from "react-icons/rx";
 import { BsPerson } from "react-icons/bs";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
-
+import toast from "react-hot-toast";
+import emailjs from '@emailjs/browser';
 const JobDetail = ({ job, refetch }) => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
@@ -26,9 +28,13 @@ const JobDetail = ({ job, refetch }) => {
     jobPostingDate,
     email,
   } = job || {};
+
   const date = new Date() > new Date(jobApplicationDeadline);
   const isValid = email === user.email;
   const handleApply = () => {
+    if (isValid) {
+      return toast.error("You can't apply to your own job post.");
+    }
 
     Swal.fire({
       title: "Enter a URL",
@@ -42,17 +48,45 @@ const JobDetail = ({ job, refetch }) => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        
         const application = {
-          user:user.uid
-          ,name:user.displayName,
-          email:user.email,
-          job:job,
-          resume:result.value
-        }
-        // console.log(application);
-        axiosSecure.put(`/apply/${_id}`).then((res) => {});
+          user: user.uid,
+          name: user.displayName,
+          email: user.email,
+          job: {
+            _id,
+            logoURL,
+            jobTitle,
+            jobLocation,
+            authorName,
+            jobCategory,
+            minimumSalary,
+            maximumSalary,
+            jobPostingDate,
+            jobApplicationDeadline,
+            jobApplicantsNumber,
+          },
+          resume: result.value,
+        };
+        axiosSecure
+          .post(`/applied`, application)
+          .then((res) => toast.success("Applied successfully Email has been sent"));
+        axiosSecure.put(`/apply/${_id}`).then((res) => console.log(res));
+        emailjs.send(
+              "service_ubspfst",
+              "template_8tf0e08",
+              application,
+              "BTts6gnwmcVb2CYW3"
+            )
+            .then(
+              (result) => {
+                console.log(result.text);
+              },
+              (error) => {
+                console.log(error.text);
+              }
+            );
         refetch();
+
       }
     });
   };
@@ -108,13 +142,35 @@ const JobDetail = ({ job, refetch }) => {
               </div>
             </div>
             <div className=" hidden md:flex">
-              <button
-                disabled={isValid}
-                onClick={handleApply}
-                className={`bg-[#7a4affd7]   disabled:border-[#494949] disabled:bg-[#280c57db]  dark:disabled:bg-[#310083bf]  text-white disabled:border-2 disabled:active:scale-100 disabled:text-[#8e8e8e] disabled:shadow-inherit py-1 md:py-2 px-5 md:px-10 rounded-lg active:scale-95 duration-200`}
-              >
-                Apply
-              </button>
+              {date === false ? (
+                isValid ? (
+                  <button
+                    onClick={handleApply}
+                    className={`bg-[#ff3535] text-white py-1 md:py-2 px-5 md:px-10 rounded-lg flex items-center gap-3 active:scale-95 duration-200`}
+                  >
+                    <span className="text-xl font-bold">
+                      <RxCross2 />
+                    </span>{" "}
+                    cant
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleApply}
+                    className={`bg-[#7a4affd7] text-white py-1 md:py-2 px-5 md:px-10 rounded-lg active:scale-95 duration-200`}
+                  >
+                    Apply
+                  </button>
+                )
+              ) : (
+                <button
+                  onClick={() => {
+                    toast.error("This job post has concluded.");
+                  }}
+                  className="text-[#bebebe] bg-[#5e2a2a] dark:text-[#bc0000] duration-200 dark:bg-[#3d0303]  py-1 md:py-2 px-5 md:px-10 rounded-lg"
+                >
+                  Expired
+                </button>
+              )}
             </div>
           </div>
           <p className="text-sm mt-2 text-[#7d8fa8] md:text-end">
@@ -157,12 +213,35 @@ const JobDetail = ({ job, refetch }) => {
           <p className="text-[#7d8fa8]  mt-2">{jobDescription}</p>
         </div>
         <div className=" mt-6  flex md:hidden">
-          <button
-            onClick={handleApply}
-            className="bg-[#794aff]  text-white py-2 md:py-2 px-8 md:px-10 rounded-lg   active:scale-95 duration-200 "
-          >
-            Apply
-          </button>
+          {date === false ? (
+            isValid ? (
+              <button
+                onClick={handleApply}
+                className={`bg-[#ff3535] text-white py-1 md:py-2 px-5 md:px-10 rounded-lg flex items-center gap-3 active:scale-95 duration-200`}
+              >
+                <span className="text-xl font-bold">
+                  <RxCross2 />
+                </span>{" "}
+                cant
+              </button>
+            ) : (
+              <button
+                onClick={handleApply}
+                className={`bg-[#7a4affd7] text-white py-1 md:py-2 px-5 md:px-10 rounded-lg active:scale-95 duration-200`}
+              >
+                Apply
+              </button>
+            )
+          ) : (
+            <button
+              onClick={() => {
+                toast.error("This job post has concluded.");
+              }}
+              className="text-[#bebebe] bg-[#5e2a2a] dark:text-[#bc0000] duration-200 dark:bg-[#3d0303]  py-1 md:py-2 px-5 md:px-10 rounded-lg"
+            >
+              Expired
+            </button>
+          )}
         </div>
       </div>
     </div>
