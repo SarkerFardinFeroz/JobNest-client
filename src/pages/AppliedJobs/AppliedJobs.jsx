@@ -7,6 +7,8 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
+import Lottie from "lottie-react";
+import emptyData from "../../assets/lottie/Empthydata.json";
 const AppliedJobs = () => {
   const text1 = "Applied Jobs";
   const text2 = "";
@@ -17,7 +19,7 @@ const AppliedJobs = () => {
     const response = await axiosSecure.get(`/applied?email=${user.email}`);
     return response.data;
   };
-  const {data,isLoading}  = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["my-job"],
     queryFn: myAppliedJobs,
     enabled: !!user.email,
@@ -36,9 +38,9 @@ const AppliedJobs = () => {
     axiosSecure.get(`/category`).then((res) => setCategory(res.data));
   }, [axiosSecure]);
   useEffect(() => {
-    
-    setAll(data);
-    
+    if (data) {
+      setAll(data);
+    }
   }, [data]);
   useEffect(() => {
     if (data) {
@@ -89,11 +91,6 @@ const AppliedJobs = () => {
     }
   }, [data]);
 
-
-
-
-
-
   return (
     <PageTransition>
       <div className="duration-0  ">
@@ -116,48 +113,78 @@ const AppliedJobs = () => {
               </TabList>
               <TabPanel>
                 <div className=" grid lg:flex md:grid-cols-2 flex-col  gap-6 lg:gap-0 p-3">
-                  {All?.map((job, idx) => (
-                    <AppliedJob key={idx} job={job} />
-                   ))} 
+                  {!All.length == 0 ? (
+                    All?.map((job, idx) => <AppliedJob key={idx} job={job} />)
+                  ) : (
+                    <div className="w-96 mx-auto">
+                      <Lottie animationData={emptyData} />
+                      <p className="text-center">
+                        No applied jobs to display at the moment. Start applying
+                        for jobs to populate this page.
+                      </p>
+                    </div>
+                  )}
                 </div>
               </TabPanel>
               <TabPanel>
                 {" "}
                 <div className="grid lg:flex md:grid-cols-2 flex-col  gap-6 lg:gap-0 p-3">
-                  {OnSite?.map((job, idx) => (
-                    <AppliedJob key={idx} job={job} />
-                  ))}
+                  {!OnSite.length == 0 ? (
+                    OnSite?.map((job, idx) => (
+                      <AppliedJob key={idx} job={job} />
+                    ))
+                  ) : (
+                    <div className="w-96 mx-auto">
+                      <Lottie animationData={emptyData} />
+                      <p className="text-center">
+                        No applied jobs to display at the moment. Start applying
+                        for jobs to populate this page.
+                      </p>
+                    </div>
+                  )}
                 </div>{" "}
               </TabPanel>
               <TabPanel>
                 {" "}
                 <div className="grid lg:flex md:grid-cols-2 flex-col  gap-6 lg:gap-0 p-3">
-                  {FullTime?.map((job, idx) => (
+                  { !FullTime.length==0 ? FullTime?.map((job, idx) => (
                     <AppliedJob key={idx} job={job} />
-                  ))}
+                  )):<div className="w-96 mx-auto">
+                  <Lottie animationData={emptyData} />
+                  <p className="text-center">No applied jobs to display at the moment. Start applying for jobs to populate this page.</p>
+                </div>}
                 </div>
               </TabPanel>
               <TabPanel>
                 {" "}
                 <div className="grid lg:flex md:grid-cols-2 flex-col  gap-6 lg:gap-0 p-3">
-                  {Remote?.map((job, idx) => (
+                  {!Remote.length==0 ?Remote?.map((job, idx) => (
                     <AppliedJob key={idx} job={job} />
-                  ))}
+                  )):<div className="w-96 mx-auto">
+                  <Lottie animationData={emptyData} />
+                  <p className="text-center">No applied jobs to display at the moment. Start applying for jobs to populate this page.</p>
+                </div>}
                 </div>
               </TabPanel>
               <TabPanel>
                 <div className="grid lg:flex md:grid-cols-2 flex-col  gap-6 lg:gap-0 p-3">
-                  {Hybrid?.map((job, idx) => (
+                  {!Hybrid.length==0 ?Hybrid?.map((job, idx) => (
                     <AppliedJob key={idx} job={job} />
-                  ))}
+                  )):<div className="w-96 mx-auto">
+                  <Lottie animationData={emptyData} />
+                  <p className="text-center">No applied jobs to display at the moment. Start applying for jobs to populate this page.</p>
+                </div>}
                 </div>
               </TabPanel>
               <TabPanel>
                 {" "}
                 <div className="grid lg:flex md:grid-cols-2 flex-col  gap-6 lg:gap-0 p-3">
-                  {PartTime?.map((job, idx) => (
+                  {!PartTime.length==0 ?PartTime?.map((job, idx) => (
                     <AppliedJob key={idx} job={job} />
-                  ))}
+                  )):<div className="w-96 mx-auto">
+                  <Lottie animationData={emptyData} />
+                  <p className="text-center">No applied jobs to display at the moment. Start applying for jobs to populate this page.</p>
+                </div>}
                 </div>
               </TabPanel>
             </Tabs>

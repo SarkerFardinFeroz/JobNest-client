@@ -84,8 +84,7 @@ const AllJobs = () => {
                     <button
                       onClick={() => setIsAll(!isAll)}
                       className={`bg-[#794aff]  text-white py-1 md:py-2 px-2 md:px-4 rounded-lg ${
-                        data?.length <= 10 ? "hidden" : ""
-                      }`}
+                        data?.length <= 10 ? "hidden" : ""   } ${filteredData?.length <= 10 ? "hidden" : "" }`}
                     >
                       {isAll ? "Show Less" : "See All"}
                     </button>
