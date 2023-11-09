@@ -57,39 +57,88 @@ const Blog = () => {
               Thank you for stopping by and being a part of this journey!"
             </p>
 
-          <div>
-          <h3 className="py-5 font-bold md:text-3xl">
-              1. What is an access token and refresh token? How do they work and
-              where should we store them on the client-side?
-            </h3>
+            <div>
+              <h3 className="py-5 font-bold md:text-3xl">
+                1. What is an access token and refresh token? How do they work
+                and where should we store them on the client-side?
+              </h3>
 
-            <h4 className="font-semibold">
-              Access token
-            </h4>
-            <p className="pt-2">
-              The access token is sensitive, and it should be stored securely on the client side. Commonly, it's stored in memory or in secure storage mechanisms provided by the client platform, such as a browser's sessionStorage for web applications or a secure storage on a mobile device. It should not be exposed to client-side JavaScript to prevent security risks like Cross-Site Scripting (XX)SS attacks.</p>
-            <h4 className="font-semibold ">
-            Refresh  token
-            </h4>
-            <p className="pt-2">The refresh token is even more sensitive because it's the key to obtaining new access tokens. It should never be exposed to client-side JavaScript. Instead, it should be securely stored on the server side and only sent to the server when requesting a new access token. For web applications, it's often stored in a secure, HTTP-only cookie, while mobile apps can use secure storage mechanisms.</p>
-          </div>
-          <div>
-          <h3 className="py-5 font-bold  md:text-3xl">
-              2. What is express js? What is Nest JS ?
-            </h3>
+              <h4 className="font-semibold ">Access token</h4>
+              <p className="pt-2">
+                The access token is sensitive, and it should be stored securely
+                on the client side. Commonly, it's stored in memory or in secure
+                storage mechanisms provided by the client platform, such as a
+                browser's sessionStorage for web applications or a secure
+                storage on a mobile device. It should not be exposed to
+                client-side JavaScript to prevent security risks like Cross-Site
+                Scripting (XX)SS attacks.
+              </p>
+              <h4 className="font-semibold pt-1 ">Refresh token</h4>
+              <p className="pt-2">
+                The refresh token is even more sensitive because it's the key to
+                obtaining new access tokens. It should never be exposed to
+                client-side JavaScript. Instead, it should be securely stored on
+                the server side and only sent to the server when requesting a
+                new access token. For web applications, it's often stored in a
+                secure, HTTP-only cookie, while mobile apps can use secure
+                storage mechanisms.
+              </p>
+            </div>
+            <div>
+              <h3 className="py-5 font-bold  md:text-3xl">
+                2. What is express js? What is Nest JS ?
+              </h3>
 
-            <h4 className="font-semibold">
-            Express.js
-            </h4>
-            <p className="pt-2">
-            Express.js is a web application framework for Node.js that simplifies the process of building web applications and APIs. It's known for its simplicity and speed and is widely used in the Node.js ecosystem for creating web servers and handling HTTP requests.</p>
-            <h4 className="font-semibold">
-            Nest.js
-            </h4>
-            <p className="pt-2">Nest.js is a full-featured Node.js framework influenced by Angular, designed for building scalable and maintainable server-side applications. It promotes a structured, modular approach to development, making it suitable for complex projects. It provides features like dependency injection and a powerful CLI for code generation. </p>
-          </div>
+              <h4 className="font-semibold">Express.js</h4>
+              <p className="pt-2">
+                Express.js is a web application framework for Node.js that
+                simplifies the process of building web applications and APIs.
+                It's known for its simplicity and speed and is widely used in
+                the Node.js ecosystem for creating web servers and handling HTTP
+                requests.
+              </p>
+              <h4 className="font-semibold pt-1">Nest.js</h4>
+              <p className="pt-2">
+                Nest.js is a full-featured Node.js framework influenced by
+                Angular, designed for building scalable and maintainable
+                server-side applications. It promotes a structured, modular
+                approach to development, making it suitable for complex
+                projects. It provides features like dependency injection and a
+                powerful CLI for code generation.{" "}
+              </p>
+            </div>
+            <div>
+              <h3 className="py-5 font-bold  md:text-3xl">
+                3. Explaining my code journey
+              </h3>
 
+              <p className="pt-2">
+                Welcome to my MERN-stack adventure! It's like coding magic with
+                MongoDB, Express.js, React, and Node.js. Join me on this
+                code-tastic journey, where bugs are our dragons, and features
+                are our treasure chests. Let's write some epic code tales
+                together!
+              </p>
+              <h4 className="font-semibold pt-2">Frontend:</h4>
+              <p className="pt-2">
+              I've employed a combination of ReactJS, Tailwind CSS, React Router, Day.js, and other frontend technologies to enhance the user experience in my project.
+              </p>
+              <h4 className="font-semibold pt-2">Backend:</h4>
+              <p className="pt-2">
+                In the backend of this project, I've successfully incorporated
+                various CRUD (Create, Read, Update, Delete) operations to manage
+                data efficiently. To ensure the security of the application,
+                I've implemented JWT (JSON Web Token) authentication. MongoDB
+                serves as the database, housing all the essential data. However,
+                one of the most challenging and rewarding aspects of the project
+                was creating the "Applied Job" page. This private endpoint
+                allows users to access and track their updated job applications.
+                It required intricate implementation and was a significant
+                achievement in enhancing user experience and data management.
+              </p>
 
+               
+            </div>
           </div>
         </div>
       </div>

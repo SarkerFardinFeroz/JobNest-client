@@ -147,44 +147,72 @@ const AppliedJobs = () => {
               <TabPanel>
                 {" "}
                 <div className="grid lg:flex md:grid-cols-2 flex-col  gap-6 lg:gap-0 p-3">
-                  { !FullTime.length==0 ? FullTime?.map((job, idx) => (
-                    <AppliedJob key={idx} job={job} />
-                  )):<div className="w-96 mx-auto">
-                  <Lottie animationData={emptyData} />
-                  <p className="text-center">No applied jobs to display at the moment. Start applying for jobs to populate this page.</p>
-                </div>}
+                  {!FullTime.length == 0 ? (
+                    FullTime?.map((job, idx) => (
+                      <AppliedJob key={idx} job={job} />
+                    ))
+                  ) : (
+                    <div className="w-96 mx-auto">
+                      <Lottie animationData={emptyData} />
+                      <p className="text-center">
+                        No applied jobs to display at the moment. Start applying
+                        for jobs to populate this page.
+                      </p>
+                    </div>
+                  )}
                 </div>
               </TabPanel>
               <TabPanel>
                 {" "}
                 <div className="grid lg:flex md:grid-cols-2 flex-col  gap-6 lg:gap-0 p-3">
-                  {!Remote.length==0 ?Remote?.map((job, idx) => (
-                    <AppliedJob key={idx} job={job} />
-                  )):<div className="w-96 mx-auto">
-                  <Lottie animationData={emptyData} />
-                  <p className="text-center">No applied jobs to display at the moment. Start applying for jobs to populate this page.</p>
-                </div>}
+                  {!Remote.length == 0 ? (
+                    Remote?.map((job, idx) => (
+                      <AppliedJob key={idx} job={job} />
+                    ))
+                  ) : (
+                    <div className="w-96 mx-auto">
+                      <Lottie animationData={emptyData} />
+                      <p className="text-center">
+                        No applied jobs to display at the moment. Start applying
+                        for jobs to populate this page.
+                      </p>
+                    </div>
+                  )}
                 </div>
               </TabPanel>
               <TabPanel>
                 <div className="grid lg:flex md:grid-cols-2 flex-col  gap-6 lg:gap-0 p-3">
-                  {!Hybrid.length==0 ?Hybrid?.map((job, idx) => (
-                    <AppliedJob key={idx} job={job} />
-                  )):<div className="w-96 mx-auto">
-                  <Lottie animationData={emptyData} />
-                  <p className="text-center">No applied jobs to display at the moment. Start applying for jobs to populate this page.</p>
-                </div>}
+                  {!Hybrid.length == 0 ? (
+                    Hybrid?.map((job, idx) => (
+                      <AppliedJob key={idx} job={job} />
+                    ))
+                  ) : (
+                    <div className="w-96 mx-auto">
+                      <Lottie animationData={emptyData} />
+                      <p className="text-center">
+                        No applied jobs to display at the moment. Start applying
+                        for jobs to populate this page.
+                      </p>
+                    </div>
+                  )}
                 </div>
               </TabPanel>
               <TabPanel>
                 {" "}
                 <div className="grid lg:flex md:grid-cols-2 flex-col  gap-6 lg:gap-0 p-3">
-                  {!PartTime.length==0 ?PartTime?.map((job, idx) => (
-                    <AppliedJob key={idx} job={job} />
-                  )):<div className="w-96 mx-auto">
-                  <Lottie animationData={emptyData} />
-                  <p className="text-center">No applied jobs to display at the moment. Start applying for jobs to populate this page.</p>
-                </div>}
+                  {!PartTime.length == 0 ? (
+                    PartTime?.map((job, idx) => (
+                      <AppliedJob key={idx} job={job} />
+                    ))
+                  ) : (
+                    <div className="w-96 mx-auto">
+                      <Lottie animationData={emptyData} />
+                      <p className="text-center">
+                        No applied jobs to display at the moment. Start applying
+                        for jobs to populate this page.
+                      </p>
+                    </div>
+                  )}
                 </div>
               </TabPanel>
             </Tabs>
