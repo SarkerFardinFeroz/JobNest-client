@@ -8,7 +8,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import toast from "react-hot-toast";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 const JobDetail = ({ job, refetch }) => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
@@ -67,16 +67,16 @@ const JobDetail = ({ job, refetch }) => {
           },
           resume: result.value,
         };
-        axiosSecure
-          .post(`/applied/${_id}`, application)
-          .then((res) => toast.success("Applied successfully Email has been sent"));
-
-
-          
-        axiosSecure.put(`/apply/${_id}`).then((res) => console.log(res));
-        emailjs.send(
+        axiosSecure.post(`/applied/${_id}`, application).then((res) => {
+          if (res.data.message == "Already applied") {
+            return toast.error("Already applied for this job");
+          }
+          axiosSecure.put(`/apply/${_id}`).then((res) => console.log(res));
+          toast.success("Applied successfully Email has been sent");
+          emailjs
+            .send(
               "service_ubspfst",
-              "template_8tf0e08",
+              "template_r62juyi",
               application,
               "BTts6gnwmcVb2CYW3"
             )
@@ -88,8 +88,8 @@ const JobDetail = ({ job, refetch }) => {
                 console.log(error.text);
               }
             );
-        refetch();
-
+          refetch();
+        });
       }
     });
   };

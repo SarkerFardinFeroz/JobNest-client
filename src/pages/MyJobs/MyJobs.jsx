@@ -23,7 +23,7 @@ const MyJobs = () => {
     return response.data;
   };
   const {
-    data: jobs,
+    data,
     isLoading,
     refetch,
   } = useQuery({
@@ -67,13 +67,13 @@ const MyJobs = () => {
                   <div>
                     <SkeletonAllJobPage cards={10} />
                   </div>
-                ) : jobs?.length === 0 ? (
+                ) : data?.length === 0 ? (
                   <div className="w-96 mx-auto">
                     <Lottie animationData={emptyData} />
                     <p className="text-center">Post jobs to see data here.</p>
                   </div>
                 ) : (
-                  jobs?.map((job, idx) => (
+                  data?.map((job, idx) => (
                     <MyJobsTabuler
                       key={idx}
                       job={job}

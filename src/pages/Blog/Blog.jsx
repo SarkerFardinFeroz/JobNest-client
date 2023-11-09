@@ -75,7 +75,7 @@ const Blog = () => {
           </div>
           <div>
           <h3 className="py-5 font-bold  md:text-3xl">
-              2.What is express js? What is Nest JS ?
+              2. What is express js? What is Nest JS ?
             </h3>
 
             <h4 className="font-semibold">

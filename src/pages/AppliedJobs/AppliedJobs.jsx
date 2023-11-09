@@ -31,11 +31,10 @@ const AppliedJobs = () => {
   const [Remote, setRemote] = useState([]);
   const [PartTime, setPartTime] = useState([]);
 
-  console.log(data);
-  const url = "/category";
+  // console.log(data);
   useEffect(() => {
-    axiosSecure.get(url).then((res) => setCategory(res.data));
-  }, [axiosSecure, url]);
+    axiosSecure.get(`/category`).then((res) => setCategory(res.data));
+  }, [axiosSecure]);
   useEffect(() => {
     
     setAll(data);
@@ -43,8 +42,8 @@ const AppliedJobs = () => {
   }, [data]);
   useEffect(() => {
     if (data) {
-      const filteredData = data.filter(
-        (job) => job?.job.jobCategory === "Hybrid"
+      const filteredData = data?.filter(
+        (job) => job?.job?.jobCategory === "Hybrid"
       );
       setHybrid(filteredData);
     }
@@ -52,7 +51,7 @@ const AppliedJobs = () => {
   useEffect(() => {
     if (data) {
       const filteredData = data.filter(
-        (job) => job?.job.jobCategory === "Hybrid"
+        (job) => job?.job?.jobCategory === "Hybrid"
       );
       setHybrid(filteredData);
     }
@@ -60,7 +59,7 @@ const AppliedJobs = () => {
   useEffect(() => {
     if (data) {
       const filteredData = data.filter(
-        (job) => job?.job.jobCategory === "On Site"
+        (job) => job?.job?.jobCategory === "On Site"
       );
       setOnSite(filteredData);
     }
@@ -68,7 +67,7 @@ const AppliedJobs = () => {
   useEffect(() => {
     if (data) {
       const filteredData = data.filter(
-        (job) => job?.job.jobCategory === "Full Time"
+        (job) => job?.job?.jobCategory === "Full Time"
       );
       setFullTime(filteredData);
     }
@@ -76,7 +75,7 @@ const AppliedJobs = () => {
   useEffect(() => {
     if (data) {
       const filteredData = data.filter(
-        (job) => job?.job.jobCategory === "Remote"
+        (job) => job?.job?.jobCategory === "Remote"
       );
       setRemote(filteredData);
     }
@@ -84,7 +83,7 @@ const AppliedJobs = () => {
   useEffect(() => {
     if (data) {
       const filteredData = data.filter(
-        (job) => job?.job.jobCategory === "Part Time"
+        (job) => job?.job?.jobCategory === "Part Time"
       );
       setPartTime(filteredData);
     }
